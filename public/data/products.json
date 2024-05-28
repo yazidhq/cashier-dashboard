@@ -1,0 +1,58 @@
+{
+  "product_list": [
+    {
+      "name": "Nasi Goreng",
+      "category": "Brunch",
+      "price": "25000",
+      "img": "img/nasi-goreng.png"
+    },
+    {
+      "name": "Mie Goreng",
+      "category": "Brunch",
+      "price": "20000",
+      "img": "img/mie-goreng.png"
+    },
+    {
+      "name": "Gado-Gado",
+      "category": "Brunch",
+      "price": "22000",
+      "img": "img/gado-gado.png"
+    },
+    {
+      "name": "Lontong Sayur",
+      "category": "Brunch",
+      "price": "24000",
+      "img": "img/lontong-sayur.png"
+    },
+    {
+      "name": "Soto Ayam",
+      "category": "Brunch",
+      "price": "23000",
+      "img": "img/soto-ayam.png"
+    },
+    {
+      "name": "Nasi Uduk",
+      "category": "Brunch",
+      "price": "21000",
+      "img": "img/nasi-uduk.png"
+    },
+    {
+      "name": "Bubur Ayam",
+      "category": "Brunch",
+      "price": "20000",
+      "img": "img/bubur-ayam.png"
+    },
+    {
+      "name": "Ketoprak",
+      "category": "Brunch",
+      "price": "22000",
+      "img": "img/ketoprak.png"
+    },
+    {
+      "name": "Pecel Lele",
+      "category": "Brunch",
+      "price": "25000",
+      "img": "img/pecel-lele.png"
+    }
+  ]
+}

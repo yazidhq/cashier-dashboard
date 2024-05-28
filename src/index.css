@@ -1,0 +1,14 @@
+.text-danger {
+  color: #ed3737 !important;
+}
+
+.btn-danger {
+  background-color: #ed3737 !important;
+}
+.btn-danger:hover {
+  background-color: #d62f2f !important;
+}
+
+.bg-light {
+  background-color: #ebebeb !important;
+}
