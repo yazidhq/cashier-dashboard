@@ -8,7 +8,7 @@ const Products = ({ handleAddOrder, showCategory }) => {
   return (
     <div className="mb-5">
       <TitleMenu firstWord={"Choose"} lastWord={"Order"} />
-      <div className="row row-cols-1 row-cols-md-3 g-4">
+      <div className="row row-cols-1 row-cols-lg-3 g-4">
         {product_list.map((item) => {
           if (item.category === showCategory) {
             return (

@@ -8,7 +8,7 @@ const Category = ({ handleCategory }) => {
   return (
     <div className="mb-5">
       <TitleMenu firstWord={"Menu"} lastWord={"Category"} />
-      <div className="row row-cols-1 row-cols-md-4 g-3">
+      <div className="row row-cols-1 row-cols-lg-4 g-3">
         {menu_category.map((item) => (
           <CategoryCard
             item={item}
