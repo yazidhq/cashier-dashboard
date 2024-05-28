@@ -1,7 +1,9 @@
-const Button = ({ text, color }) => {
+const Button = ({ text, color, handleCancel = () => {} }) => {
   return (
-    <div className="d-grid mt-5">
-      <button className={`btn btn-${color}`}>{text}</button>
+    <div className="d-grid">
+      <button className={`btn btn-${color}`} onClick={handleCancel}>
+        {text}
+      </button>
     </div>
   );
 };

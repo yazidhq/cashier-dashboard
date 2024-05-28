@@ -1,6 +1,10 @@
-const ProductCard = ({ item }) => {
+const ProductCard = ({ item, handleAddOrder }) => {
+  const handleClick = () => {
+    handleAddOrder(item.name, item.price);
+  };
+
   return (
-    <div className="col">
+    <form action="" method="POST" onClick={handleClick} className="col">
       <div className="card border-0 h-100 d-flex flex-column">
         <div className="card-body text-center d-flex flex-column">
           <div className="d-flex flex-grow-1 align-items-center justify-content-center">
@@ -18,7 +22,7 @@ const ProductCard = ({ item }) => {
           </div>
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 
