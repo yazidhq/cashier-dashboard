@@ -1,6 +1,6 @@
 const ProductCard = ({ item, handleAddOrder }) => {
   const handleClick = () => {
-    handleAddOrder(item.name, item.price);
+    handleAddOrder(item.name, item.category, item.price);
   };
 
   return (

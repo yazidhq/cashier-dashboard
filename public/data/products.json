@@ -53,6 +53,168 @@
       "category": "Brunch",
       "price": "25000",
       "img": "img/pecel-lele.png"
+    },
+    {
+      "name": "Es Teh",
+      "category": "Cold",
+      "price": "8000",
+      "img": "img/es-teh.png"
+    },
+    {
+      "name": "Es Jeruk",
+      "category": "Cold",
+      "price": "10000",
+      "img": "img/es-jeruk.png"
+    },
+    {
+      "name": "Es Campur",
+      "category": "Cold",
+      "price": "12000",
+      "img": "img/es-campur.png"
+    },
+    {
+      "name": "Es Kelapa",
+      "category": "Cold",
+      "price": "15000",
+      "img": "img/es-kelapa.png"
+    },
+    {
+      "name": "Es Cincau",
+      "category": "Cold",
+      "price": "12000",
+      "img": "img/es-cincau.png"
+    },
+    {
+      "name": "Es Doger",
+      "category": "Cold",
+      "price": "20000",
+      "img": "img/es-doger.png"
+    },
+    {
+      "name": "Es Cendol",
+      "category": "Cold",
+      "price": "15000",
+      "img": "img/es-cendol.png"
+    },
+    {
+      "name": "Es Teler",
+      "category": "Cold",
+      "price": "18000",
+      "img": "img/es-teler.png"
+    },
+    {
+      "name": "Es Buah",
+      "category": "Cold",
+      "price": "20000",
+      "img": "img/es-buah.png"
+    },
+    {
+      "name": "Teh Panas",
+      "category": "Hot",
+      "price": "10000",
+      "img": "img/teh-panas.png"
+    },
+    {
+      "name": "Kopi Hitam",
+      "category": "Hot",
+      "price": "15000",
+      "img": "img/kopi-hitam.png"
+    },
+    {
+      "name": "Coklat Panas",
+      "category": "Hot",
+      "price": "18000",
+      "img": "img/coklat-panas.png"
+    },
+    {
+      "name": "Susu Jahe",
+      "category": "Hot",
+      "price": "20000",
+      "img": "img/susu-jahe.png"
+    },
+    {
+      "name": "Kopi Susu",
+      "category": "Hot",
+      "price": "16000",
+      "img": "img/kopi-susu.png"
+    },
+    {
+      "name": "Teh Hijau",
+      "category": "Hot",
+      "price": "12000",
+      "img": "img/teh-hijau.png"
+    },
+    {
+      "name": "Teh Herbal",
+      "category": "Hot",
+      "price": "15000",
+      "img": "img/teh-herbal.png"
+    },
+    {
+      "name": "Wedang Uwuh",
+      "category": "Hot",
+      "price": "20000",
+      "img": "img/wedang-uwuh.png"
+    },
+    {
+      "name": "Teh Tarik",
+      "category": "Hot",
+      "price": "18000",
+      "img": "img/teh-tarik.png"
+    },
+    {
+      "name": "Kentang Goreng",
+      "category": "Snack",
+      "price": "10000",
+      "img": "img/kentang-goreng.png"
+    },
+    {
+      "name": "Sosis Goreng",
+      "category": "Snack",
+      "price": "15000",
+      "img": "img/sosis-goreng.png"
+    },
+    {
+      "name": "Nugget Goreng",
+      "category": "Snack",
+      "price": "12000",
+      "img": "img/nugget-goreng.png"
+    },
+    {
+      "name": "Keripik Singkong",
+      "category": "Snack",
+      "price": "12000",
+      "img": "img/keripik-singkong.png"
+    },
+    {
+      "name": "Keripik Kentang",
+      "category": "Snack",
+      "price": "15000",
+      "img": "img/keripik-kentang.png"
+    },
+    {
+      "name": "Keripik Teri",
+      "category": "Snack",
+      "price": "18000",
+      "img": "img/keripik-teri.png"
+    },
+    {
+      "name": "Keripik Udang",
+      "category": "Snack",
+      "price": "20000",
+      "img": "img/keripik-udang.png"
+    },
+    {
+      "name": "Kacang Mede",
+      "category": "Snack",
+      "price": "25000",
+      "img": "img/kacang-mede.png"
+    },
+    {
+      "name": "Kacang Almond",
+      "category": "Snack",
+      "price": "28000",
+      "img": "img/kacang-almond.png"
     }
   ]
 }

@@ -16,13 +16,16 @@ const DashboardPage = () => {
   const order = JSON.parse(localStorage.getItem("order"));
   const [orderMenu, setOrderMenu] = useState(order ? order : []);
 
+  const [showCategory, setShowCategory] = useState("Brunch");
+
   useEffect(() => {
     localStorage.setItem("order", JSON.stringify(orderMenu));
   }, [orderMenu]);
 
-  const handleAddOrder = (name, price) => {
+  const handleAddOrder = (name, category, price) => {
     const data = {
       name,
+      category,
       price,
       qty: 1,
     };
@@ -35,7 +38,13 @@ const DashboardPage = () => {
     } else {
       setOrderMenu([
         ...orderMenu,
-        { id: data.id, name: data.name, price: data.price, qty: data.qty },
+        {
+          id: data.id,
+          name: data.name,
+          category: data.category,
+          price: data.price,
+          qty: data.qty,
+        },
       ]);
     }
   };
@@ -58,6 +67,10 @@ const DashboardPage = () => {
 
   const taxPrice = totalPrice * 0.05;
 
+  const handleCategory = (category) => {
+    setShowCategory(category);
+  };
+
   return (
     <div className="d-flex">
       <div className="px-4">
@@ -74,20 +87,29 @@ const DashboardPage = () => {
           <TitleMenu firstWord={"Menu"} lastWord={"Category"} />
           <div className="row row-cols-1 row-cols-md-4 g-3">
             {menu_category.map((item) => (
-              <CategoryCard item={item} key={item} />
+              <CategoryCard
+                item={item}
+                key={item}
+                handleCategory={() => handleCategory(item)}
+              />
             ))}
           </div>
         </div>
         <div className="mb-5">
           <TitleMenu firstWord={"Choose"} lastWord={"Order"} />
           <div className="row row-cols-1 row-cols-md-3 g-4">
-            {product_list.map((item) => (
-              <ProductCard
-                item={item}
-                key={item.name}
-                handleAddOrder={handleAddOrder}
-              />
-            ))}
+            {product_list.map((item) => {
+              if (item.category === showCategory) {
+                return (
+                  <ProductCard
+                    item={item}
+                    key={item.name}
+                    handleAddOrder={handleAddOrder}
+                  />
+                );
+              }
+              return null;
+            })}
           </div>
         </div>
       </div>

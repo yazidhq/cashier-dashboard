@@ -1,6 +1,6 @@
 import { FaUtensils, FaCoffee, FaMugHot, FaHamburger } from "react-icons/fa";
 
-const CategoryCard = ({ item }) => {
+const CategoryCard = ({ item, handleCategory = () => {} }) => {
   const getCategoryIcon = (categoryName) => {
     switch (categoryName) {
       case "Brunch":
@@ -9,7 +9,7 @@ const CategoryCard = ({ item }) => {
         return <FaMugHot />;
       case "Cold":
         return <FaCoffee />;
-      case "Snacks":
+      case "Snack":
         return <FaHamburger />;
       default:
         return "";
@@ -17,7 +17,7 @@ const CategoryCard = ({ item }) => {
   };
 
   return (
-    <div className="col">
+    <div className="col" onClick={handleCategory}>
       <div className="card border-0">
         <div className="card-body text-center">
           <div className="fs-1 mb-3">{getCategoryIcon(item)}</div>
