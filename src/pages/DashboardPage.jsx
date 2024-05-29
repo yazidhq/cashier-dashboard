@@ -64,9 +64,14 @@ const DashboardPage = () => {
 
   return (
     <Section>
-      <div className="flex-grow-1 px-5 pt-4 bg-light">
-        <Category handleCategory={handleCategory} />
-        <Products showCategory={showCategory} handleAddOrder={handleAddOrder} />
+      <div style={{ paddingLeft: "3rem" }}>
+        <div className="flex-grow-1 px-5 pt-4 bg-light pb-1">
+          <Category handleCategory={handleCategory} />
+          <Products
+            showCategory={showCategory}
+            handleAddOrder={handleAddOrder}
+          />
+        </div>
       </div>
       <Orders
         orderMenu={orderMenu}
