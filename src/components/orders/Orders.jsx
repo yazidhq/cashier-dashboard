@@ -33,7 +33,7 @@ const Orders = ({
           <Button
             text={"cancel order"}
             color={""}
-            handleCancel={handleCancelOrder}
+            handleClick={handleCancelOrder}
           />
         </>
       )}

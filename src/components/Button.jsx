@@ -1,7 +1,7 @@
-const Button = ({ text, color, handleCancel = () => {} }) => {
+const Button = ({ grid = "d-grid", text, color, handleClick = () => {} }) => {
   return (
-    <div className="d-grid">
-      <button className={`btn btn-${color}`} onClick={handleCancel}>
+    <div className={grid}>
+      <button className={`btn btn-${color}`} onClick={handleClick}>
         {text}
       </button>
     </div>

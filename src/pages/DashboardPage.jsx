@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import Category from "../components/category/Category";
-import Products from "../components/product/Products";
+import ProductsCard from "../components/product/ProductsCard";
 import Orders from "../components/orders/Orders";
 import Section from "../components/layouts/Section";
 
 const DashboardPage = () => {
   const order = JSON.parse(localStorage.getItem("order"));
   const [orderMenu, setOrderMenu] = useState(order ? order : []);
-  const [showCategory, setShowCategory] = useState("Brunch");
+  const [showCategory, setShowCategory] = useState("all");
 
   useEffect(() => {
     localStorage.setItem("order", JSON.stringify(orderMenu));
@@ -67,7 +67,7 @@ const DashboardPage = () => {
       <div style={{ paddingLeft: "3rem" }}>
         <div className="flex-grow-1 px-5 pt-4 bg-light pb-1">
           <Category handleCategory={handleCategory} />
-          <Products
+          <ProductsCard
             showCategory={showCategory}
             handleAddOrder={handleAddOrder}
           />

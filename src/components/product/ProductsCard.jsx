@@ -6,16 +6,13 @@ const Products = ({ handleAddOrder, showCategory }) => {
   const product_list = products.product_list;
 
   const product = product_list.map((item) => {
-    if (item.category === showCategory) {
-      return (
-        <ProductCard
-          item={item}
-          key={item.name}
-          handleAddOrder={handleAddOrder}
-        />
-      );
-    }
-    return null;
+    return showCategory === "all" || item.category === showCategory ? (
+      <ProductCard
+        item={item}
+        key={item.name}
+        handleAddOrder={handleAddOrder}
+      />
+    ) : null;
   });
 
   return (

@@ -8,12 +8,18 @@
 .btn-danger:hover {
   background-color: #d62f2f !important;
 }
+.btn-white {
+  background-color: white !important;
+}
+.btn-white:hover {
+  background-color: #f5f5f5 !important;
+}
 
 .bg-light {
   background-color: #ebebeb !important;
 }
 
-.card:hover {
+.card-v2:hover {
   transform: scale(1.05);
   transition: transform 0.3s ease;
 }

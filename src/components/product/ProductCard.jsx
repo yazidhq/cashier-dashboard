@@ -5,7 +5,7 @@ const ProductCard = ({ item, handleAddOrder }) => {
 
   return (
     <form action="" method="POST" onClick={handleClick} className="col">
-      <div className="card border-0 h-100 d-flex flex-column">
+      <div className="card card-v2 border-0 h-100 d-flex flex-column">
         <div className="card-body text-center d-flex flex-column">
           <div className="d-flex flex-grow-1 align-items-center justify-content-center">
             <img

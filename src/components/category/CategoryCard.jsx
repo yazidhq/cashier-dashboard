@@ -18,7 +18,7 @@ const CategoryCard = ({ item, handleCategory = () => {} }) => {
 
   return (
     <div className="col" onClick={handleCategory}>
-      <div className="card border-0">
+      <div className="card card-v2 border-0">
         <div className="card-body text-center">
           <div className="fs-1 mb-3">{getCategoryIcon(item)}</div>
           <h5 className="card-title">{item}</h5>
