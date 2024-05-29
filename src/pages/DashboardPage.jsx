@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import Sidebar from "../components/layouts/Sidebar";
 import Category from "../components/category/Category";
 import Products from "../components/product/Products";
 import Orders from "../components/orders/Orders";
+import Section from "../components/templates/Section";
 
 const DashboardPage = () => {
   const order = JSON.parse(localStorage.getItem("order"));
@@ -63,8 +63,7 @@ const DashboardPage = () => {
   };
 
   return (
-    <div className="d-flex">
-      <Sidebar />
+    <Section>
       <div className="flex-grow-1 px-5 pt-3 bg-light">
         <Category handleCategory={handleCategory} />
         <Products showCategory={showCategory} handleAddOrder={handleAddOrder} />
@@ -76,7 +75,7 @@ const DashboardPage = () => {
         handleCancelOrder={handleCancelOrder}
         handleCancelSingleOrder={handleCancelSingleOrder}
       />
-    </div>
+    </Section>
   );
 };
 

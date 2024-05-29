@@ -5,18 +5,18 @@ import TitleMenu from "../TitleMenu";
 const Category = ({ handleCategory }) => {
   const menu_category = category.menu_category;
 
+  const categories = menu_category.map((item) => (
+    <CategoryCard
+      item={item}
+      key={item}
+      handleCategory={() => handleCategory(item)}
+    />
+  ));
+
   return (
     <div className="mb-5">
       <TitleMenu firstWord={"Menu"} lastWord={"Category"} />
-      <div className="row row-cols-1 row-cols-lg-4 g-3">
-        {menu_category.map((item) => (
-          <CategoryCard
-            item={item}
-            key={item}
-            handleCategory={() => handleCategory(item)}
-          />
-        ))}
-      </div>
+      <div className="row row-cols-1 row-cols-lg-4 g-3">{categories}</div>
     </div>
   );
 };
