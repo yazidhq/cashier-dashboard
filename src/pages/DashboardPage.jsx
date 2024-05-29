@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Category from "../components/category/Category";
 import Products from "../components/product/Products";
 import Orders from "../components/orders/Orders";
-import Section from "../components/templates/Section";
+import Section from "../components/layouts/Section";
 
 const DashboardPage = () => {
   const order = JSON.parse(localStorage.getItem("order"));
@@ -64,7 +64,7 @@ const DashboardPage = () => {
 
   return (
     <Section>
-      <div className="flex-grow-1 px-5 pt-3 bg-light">
+      <div className="flex-grow-1 px-5 pt-4 bg-light">
         <Category handleCategory={handleCategory} />
         <Products showCategory={showCategory} handleAddOrder={handleAddOrder} />
       </div>

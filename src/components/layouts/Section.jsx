@@ -1,4 +1,4 @@
-import Sidebar from "../layouts/Sidebar";
+import Sidebar from "./Sidebar";
 
 const Section = ({ children }) => {
   return (
