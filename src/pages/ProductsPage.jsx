@@ -6,6 +6,7 @@ const ProductsPage = () => {
   const product = JSON.parse(localStorage.getItem("products"));
   const [products, setProducts] = useState(product ? product : []);
   const [addButtonShow, setAddButtonShow] = useState(false);
+  const [showEditForm, setShowEditForm] = useState({ status: false, name: "" });
 
   useEffect(() => {
     localStorage.setItem("products", JSON.stringify(products));
@@ -18,7 +19,7 @@ const ProductsPage = () => {
       category: e.target.category.value,
       price: e.target.price.value,
       qty: e.target.qty.value,
-      image: e.target.image.value.replace("C:\\fakepath\\", ""),
+      img: e.target.img.value.replace("C:\\fakepath\\", ""),
     };
     setProducts([
       ...products,
@@ -27,7 +28,7 @@ const ProductsPage = () => {
         category: data.category,
         price: data.price,
         qty: data.qty,
-        image: data.image,
+        img: data.img,
       },
     ]);
   };
@@ -38,8 +39,28 @@ const ProductsPage = () => {
     localStorage.setItem("order", JSON.stringify(updatedProducts));
   };
 
+  const handleUpdateProduct = (e) => {
+    e.preventDefault();
+    const data = {
+      name: e.target.name.value,
+      category: e.target.category.value,
+      price: e.target.price.value,
+      qty: e.target.qty.value,
+      img: e.target.img.value.replace("C:\\fakepath\\", ""),
+    };
+    if (data.img === "") {
+      console.log([data.name, data.category, data.price, data.qty]);
+    } else {
+      console.log([data.name, data.category, data.price, data.qty, data.img]);
+    }
+  };
+
   const handleAddButton = () => {
     setAddButtonShow(!addButtonShow);
+  };
+
+  const handleShowEditFormButton = (productName) => {
+    setShowEditForm({ status: !showEditForm.status, name: productName });
   };
 
   return (
@@ -48,10 +69,13 @@ const ProductsPage = () => {
         <div className="flex-grow-1 px-5 pt-4 bg-light pb-1">
           <ProductsTable
             handleAddButton={handleAddButton}
-            addButton={addButtonShow}
             handleAddProduct={handleAddProduct}
             handleRemoveProduct={handleRemoveProduct}
+            handleUpdateProduct={handleUpdateProduct}
             showProducts={products}
+            addButton={addButtonShow}
+            handleShowEditFormButton={handleShowEditFormButton}
+            editButton={showEditForm}
           />
         </div>
       </div>

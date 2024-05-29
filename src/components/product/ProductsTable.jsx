@@ -5,11 +5,14 @@ import ProductTable from "./ProductTable";
 import ProductsForm from "./ProductsForm";
 
 const ProductsTable = ({
-  handleAddButton,
-  addButton,
   handleAddProduct,
   handleRemoveProduct,
+  handleUpdateProduct,
   showProducts,
+  handleAddButton,
+  addButton,
+  handleShowEditFormButton,
+  editButton,
 }) => {
   const menu_category = category.menu_category;
 
@@ -17,7 +20,7 @@ const ProductsTable = ({
     <div className="mb-5">
       <div className="d-flex justify-content-between">
         <TitleMenu firstWord={"Product"} lastWord={"Managements"} />
-        <div className="mt-2">
+        <div className="mt-3">
           <Button
             grid=""
             text={"Add new product"}
@@ -37,6 +40,9 @@ const ProductsTable = ({
       <ProductTable
         showProducts={showProducts}
         handleRemoveProduct={handleRemoveProduct}
+        handleUpdateProduct={handleUpdateProduct}
+        handleShowEditFormButton={handleShowEditFormButton}
+        editButton={editButton}
       />
     </div>
   );

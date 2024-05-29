@@ -7,7 +7,11 @@ const Button = ({
 }) => {
   return (
     <div className={grid}>
-      <button type={type} className={`btn btn-${color}`} onClick={handleClick}>
+      <button
+        type={type}
+        className={`btn btn-sm btn-${color}`}
+        onClick={handleClick}
+      >
         {text}
       </button>
     </div>
