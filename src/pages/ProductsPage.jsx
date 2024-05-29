@@ -6,7 +6,10 @@ const ProductsPage = () => {
   const product = JSON.parse(localStorage.getItem("products"));
   const [products, setProducts] = useState(product ? product : []);
   const [addButtonShow, setAddButtonShow] = useState(false);
-  const [showEditForm, setShowEditForm] = useState({ status: false, name: "" });
+  const [editButtonShow, setEditButtonShow] = useState({
+    status: false,
+    name: "",
+  });
 
   useEffect(() => {
     localStorage.setItem("products", JSON.stringify(products));
@@ -59,8 +62,8 @@ const ProductsPage = () => {
     setAddButtonShow(!addButtonShow);
   };
 
-  const handleShowEditFormButton = (productName) => {
-    setShowEditForm({ status: !showEditForm.status, name: productName });
+  const handleEditButton = (productName) => {
+    setEditButtonShow({ status: !showEditForm.status, name: productName });
   };
 
   return (
@@ -74,8 +77,8 @@ const ProductsPage = () => {
             handleUpdateProduct={handleUpdateProduct}
             showProducts={products}
             addButton={addButtonShow}
-            handleShowEditFormButton={handleShowEditFormButton}
-            editButton={showEditForm}
+            handleEditButton={handleEditButton}
+            editButton={editButtonShow}
           />
         </div>
       </div>

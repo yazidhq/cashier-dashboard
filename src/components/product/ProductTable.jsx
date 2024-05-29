@@ -5,7 +5,7 @@ import category from "../../../public/data/category.json";
 const ProductTable = ({
   showProducts,
   handleRemoveProduct,
-  handleShowEditFormButton,
+  handleEditButton,
   editButton,
   handleUpdateProduct,
 }) => {
@@ -30,7 +30,7 @@ const ProductTable = ({
           <div className="col-md-2 mt-2">100</div>
           <div className="col-md-2 mt-2">
             <div className="d-flex gap-3 mt-1">
-              <FaEdit onClick={() => handleShowEditFormButton(item.name)} />
+              <FaEdit onClick={() => handleEditButton(item.name)} />
               <FaTrash onClick={() => handleRemoveProduct(item.name)} />
             </div>
           </div>

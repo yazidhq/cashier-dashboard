@@ -11,7 +11,7 @@ const ProductsTable = ({
   showProducts,
   handleAddButton,
   addButton,
-  handleShowEditFormButton,
+  handleEditButton,
   editButton,
 }) => {
   const menu_category = category.menu_category;
@@ -41,7 +41,7 @@ const ProductsTable = ({
         showProducts={showProducts}
         handleRemoveProduct={handleRemoveProduct}
         handleUpdateProduct={handleUpdateProduct}
-        handleShowEditFormButton={handleShowEditFormButton}
+        handleEditButton={handleEditButton}
         editButton={editButton}
       />
     </div>
