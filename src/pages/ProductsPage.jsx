@@ -11,6 +11,8 @@ const ProductsPage = () => {
     name: "",
   });
 
+  console.log(editButtonShow);
+
   useEffect(() => {
     localStorage.setItem("products", JSON.stringify(products));
   }, [products]);
@@ -63,7 +65,7 @@ const ProductsPage = () => {
   };
 
   const handleEditButton = (productName) => {
-    setEditButtonShow({ status: !showEditForm.status, name: productName });
+    setEditButtonShow({ status: !editButtonShow.status, name: productName });
   };
 
   return (
