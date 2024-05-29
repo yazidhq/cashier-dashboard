@@ -41,7 +41,7 @@ const DashboardPage = () => {
   };
 
   const handleCancelOrder = () => {
-    localStorage.clear();
+    localStorage.removeItem("order");
     setOrderMenu([]);
   };
 
