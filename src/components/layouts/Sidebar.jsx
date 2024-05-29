@@ -27,9 +27,9 @@ const Sidebar = () => {
             </Link>
           </li>
           <li className="fs-2 mt-3 text-center">
-            <a href="/products" className="text-decoration-none text-danger">
+            <Link to="/products" className="text-decoration-none text-danger">
               <FaUtensils />
-            </a>
+            </Link>
           </li>
           <li className="fs-2 mt-3 text-center">
             <Link to="/" className="text-decoration-none text-danger">
