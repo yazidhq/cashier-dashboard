@@ -6,8 +6,9 @@ Website Cashier is a simple web application that allows you to efficiently manag
 
 ## Key Features
 
-- **Product Management**: Add, edit, and delete products from the list.
 - **Homepage Order Placement**: Order products directly from the homepage by adding them to the shopping cart.
+- **Product Management**: Add, edit, and delete products from the list.
+- **Sales Reporting (ONGOING)**:
 - **Checkout (ONGOING)**:
 
 ## Core Technologies
