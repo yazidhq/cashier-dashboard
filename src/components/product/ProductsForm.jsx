@@ -10,7 +10,11 @@ const ProductsForm = ({
     <form
       action=""
       method="POST"
-      onSubmit={handleUpdateProduct ? handleUpdateProduct : handleAddProduct}
+      onSubmit={
+        handleUpdateProduct
+          ? (e) => handleUpdateProduct(data_value.name, e)
+          : handleAddProduct
+      }
       className={`mb-3 ${handleUpdateProduct ? "mt-3" : ""}`}
     >
       <div className="d-flex justify-content-between gap-1 mb-1">

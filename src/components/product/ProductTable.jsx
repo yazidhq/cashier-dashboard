@@ -27,7 +27,7 @@ const ProductTable = ({
             Rp.
             {item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
           </div>
-          <div className="col-md-2 mt-2">100</div>
+          <div className="col-md-2 mt-2">{item.qty}</div>
           <div className="col-md-2 mt-2">
             <div className="d-flex gap-3 mt-1">
               <FaEdit onClick={() => handleEditButton(item.name)} />

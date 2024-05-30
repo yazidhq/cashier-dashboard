@@ -11,8 +11,6 @@ const ProductsPage = () => {
     name: "",
   });
 
-  console.log(editButtonShow);
-
   useEffect(() => {
     localStorage.setItem("products", JSON.stringify(products));
   }, [products]);
@@ -44,7 +42,7 @@ const ProductsPage = () => {
     localStorage.setItem("order", JSON.stringify(updatedProducts));
   };
 
-  const handleUpdateProduct = (e) => {
+  const handleUpdateProduct = (name, e) => {
     e.preventDefault();
     const data = {
       name: e.target.name.value,
@@ -53,11 +51,23 @@ const ProductsPage = () => {
       qty: e.target.qty.value,
       img: e.target.img.value.replace("C:\\fakepath\\", ""),
     };
-    if (data.img === "") {
-      console.log([data.name, data.category, data.price, data.qty]);
-    } else {
-      console.log([data.name, data.category, data.price, data.qty, data.img]);
-    }
+
+    const updatedProducts = products.map((item) => {
+      if (item.name === name) {
+        return {
+          ...item,
+          name: data.name,
+          category: data.category,
+          price: data.price,
+          qty: data.qty,
+          img: data.img === "" ? item.img : data.img,
+        };
+      }
+      return item;
+    });
+
+    setProducts(updatedProducts);
+    localStorage.setItem("products", JSON.stringify(updatedProducts));
   };
 
   const handleAddButton = () => {
