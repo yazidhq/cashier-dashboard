@@ -2,6 +2,7 @@ import Button from "../Button";
 import OrderTotal from "./OrderTotal";
 import TitleMenu from "../TitleMenu";
 import OrderMenu from "./OrderMenu";
+import OrderModal from "./OrderModal";
 
 const Orders = ({
   orderMenu,
@@ -9,6 +10,10 @@ const Orders = ({
   taxPrice,
   handleCancelOrder,
   handleCancelSingleOrder,
+  orderButton,
+  isOrderButtonClick,
+  handleChange,
+  changeOrder,
 }) => {
   const orders = orderMenu.map((item) => (
     <OrderMenu
@@ -29,7 +34,18 @@ const Orders = ({
         <>
           <hr />
           <OrderTotal price={totalPrice} tax={taxPrice} />
-          <Button text={"Order"} color={"danger"} />
+
+          <Button text={"Order"} color={"danger"} handleClick={orderButton} />
+          {isOrderButtonClick && (
+            <OrderModal
+              orderButton={orderButton}
+              totalPrice={totalPrice}
+              taxPrice={taxPrice}
+              handleChange={handleChange}
+              changeOrder={changeOrder}
+            />
+          )}
+
           <Button
             text={"cancel order"}
             color={""}

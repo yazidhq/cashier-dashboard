@@ -8,6 +8,8 @@ const DashboardPage = () => {
   const order = JSON.parse(localStorage.getItem("order"));
   const [orderMenu, setOrderMenu] = useState(order ? order : []);
   const [showCategory, setShowCategory] = useState("all");
+  const [orderButton, setOrderButton] = useState(false);
+  const [changeOrder, setChangeOrder] = useState();
 
   useEffect(() => {
     localStorage.setItem("order", JSON.stringify(orderMenu));
@@ -62,6 +64,14 @@ const DashboardPage = () => {
     setShowCategory(category);
   };
 
+  const handleOrderButton = () => {
+    setOrderButton(!orderButton);
+  };
+
+  const handleChange = (nominal) => {
+    setChangeOrder(nominal);
+  };
+
   return (
     <Section>
       <div style={{ paddingLeft: "3rem" }}>
@@ -79,6 +89,10 @@ const DashboardPage = () => {
         taxPrice={taxPrice}
         handleCancelOrder={handleCancelOrder}
         handleCancelSingleOrder={handleCancelSingleOrder}
+        orderButton={handleOrderButton}
+        isOrderButtonClick={orderButton}
+        handleChange={handleChange}
+        changeOrder={changeOrder}
       />
     </Section>
   );
