@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Section from "../components/layouts/Section";
 import ProductsTable from "../components/product/ProductsTable";
+import Swal from "sweetalert2";
 
 const ProductsPage = () => {
   const product = JSON.parse(localStorage.getItem("products"));
@@ -17,6 +18,7 @@ const ProductsPage = () => {
 
   const handleAddProduct = (e) => {
     e.preventDefault();
+
     const data = {
       name: e.target.name.value,
       category: e.target.category.value,
@@ -24,6 +26,7 @@ const ProductsPage = () => {
       qty: e.target.qty.value,
       img: e.target.img.value.replace("C:\\fakepath\\", ""),
     };
+
     setProducts([
       ...products,
       {
@@ -34,12 +37,27 @@ const ProductsPage = () => {
         img: data.img,
       },
     ]);
+
+    Swal.fire("Addedd!", "Product have been created successfully", "success");
   };
 
   const handleRemoveProduct = (name) => {
-    const updatedProducts = products.filter((item) => item.name !== name);
-    setProducts(updatedProducts);
-    localStorage.setItem("order", JSON.stringify(updatedProducts));
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const updatedProducts = products.filter((item) => item.name !== name);
+        setProducts(updatedProducts);
+        localStorage.setItem("products", JSON.stringify(updatedProducts));
+        Swal.fire("Deleted!", "Your product has been deleted.", "success");
+      }
+    });
   };
 
   const handleUpdateProduct = (name, e) => {
@@ -68,6 +86,8 @@ const ProductsPage = () => {
 
     setProducts(updatedProducts);
     localStorage.setItem("products", JSON.stringify(updatedProducts));
+
+    Swal.fire("Updated!", "Your product has been updated.", "success");
   };
 
   const handleAddButton = () => {
