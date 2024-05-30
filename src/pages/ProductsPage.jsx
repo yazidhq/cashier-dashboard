@@ -38,7 +38,7 @@ const ProductsPage = () => {
       },
     ]);
 
-    Swal.fire("Addedd!", "Product have been created successfully", "success");
+    Swal.fire("Added!", "Product have been created successfully", "success");
   };
 
   const handleRemoveProduct = (name) => {

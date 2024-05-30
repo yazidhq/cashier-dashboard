@@ -48,3 +48,5 @@ Website Cashier is a simple web application that allows you to efficiently manag
 - **Add Product**: Click "Add new product" in the products menu to add a new product to the list.
 - **Edit Product**: Click the "Edit" icon in the products menu next to the product to edit existing product information.
 - **Delete Product**: Click the "Delete" icon in the products menu to delete a product from the list.
+
+ui references: https://www.youtube.com/watch?v=kGr70HcD6Xo
