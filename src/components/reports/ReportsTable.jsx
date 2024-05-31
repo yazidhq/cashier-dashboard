@@ -6,7 +6,8 @@ const ReportsTable = ({
   searchTerm,
   handleSearch,
   filteredData,
-  handleDetails,
+  handleMouseDown,
+  handleMouseUp,
   details,
 }) => {
   return (
@@ -19,7 +20,8 @@ const ReportsTable = ({
       </div>
       <ReportTable
         filteredData={filteredData}
-        handleDetails={handleDetails}
+        handleMouseDown={handleMouseDown}
+        handleMouseUp={handleMouseUp}
         details={details}
       />
     </div>

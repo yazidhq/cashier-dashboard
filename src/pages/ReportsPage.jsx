@@ -20,8 +20,12 @@ const ReportsPage = () => {
     )
     .sort((a, b) => new Date(b.date) - new Date(a.date));
 
-  const handleDetails = (date) => {
-    setDetails({ status: !details.status, date: date });
+  const handleMouseDown = (date) => {
+    setDetails({ status: true, date: date });
+  };
+
+  const handleMouseUp = (date) => {
+    setDetails({ status: false, date: date });
   };
 
   return (
@@ -32,7 +36,8 @@ const ReportsPage = () => {
             searchTerm={searchTerm}
             handleSearch={handleSearch}
             filteredData={filteredData}
-            handleDetails={handleDetails}
+            handleMouseDown={handleMouseDown}
+            handleMouseUp={handleMouseUp}
             details={details}
           />
         </div>
