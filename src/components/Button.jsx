@@ -4,12 +4,13 @@ const Button = ({
   color,
   handleClick = () => {},
   type = "button",
+  rounded,
 }) => {
   return (
     <div className={grid}>
       <button
         type={type}
-        className={`btn btn-sm btn-${color}`}
+        className={`btn btn-sm btn-${color} ${rounded}`}
         onClick={handleClick}
       >
         {text}

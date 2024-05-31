@@ -8,8 +8,8 @@ Website Cashier is a simple web application that allows you to efficiently manag
 
 - **Homepage Order Placement**: Order products directly from the homepage by adding them to the shopping cart.
 - **Product Management**: Add, edit, and delete products from the list.
-- **Sales Reporting (ONGOING)**:
-- **Checkout (ONGOING)**:
+- **Payment**: Implementation of an easy and secure payment process.
+- **Sales Reporting (ONGOING)**: Showing the sales report of orders.
 
 ## Core Technologies
 
@@ -44,9 +44,10 @@ Website Cashier is a simple web application that allows you to efficiently manag
 - **Homepage Order Placement**: Click on the product you wish to add to the order cart.
 - **Clearing the Order Cart**: Click "cancel" below the order cart.
 - **Removing a Product from the Order Cart**: Click on the product image you wish to remove.
-- **Checkout (ONGOING)**:
+- **Payment**: Click "Pay Now" after reviewing the order items.
 - **Add Product**: Click "Add new product" in the products menu to add a new product to the list.
 - **Edit Product**: Click the "Edit" icon in the products menu next to the product to edit existing product information.
 - **Delete Product**: Click the "Delete" icon in the products menu to delete a product from the list.
+- **Report Page (ONGOING)**: Click the "Report" icon in the sidebar to display the order report.
 
-ui references: https://www.youtube.com/watch?v=kGr70HcD6Xo
+UI References: https://www.youtube.com/watch?v=kGr70HcD6Xo

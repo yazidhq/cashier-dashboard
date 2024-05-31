@@ -10,6 +10,9 @@ const DashboardPage = () => {
   const [showCategory, setShowCategory] = useState("all");
   const [orderButton, setOrderButton] = useState(false);
   const [changeOrder, setChangeOrder] = useState();
+  const report = JSON.parse(localStorage.getItem("report"));
+  const [reportOrder, setReportOrder] = useState(report ? report : []);
+  const [successPayment, setSuccessPayment] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("order", JSON.stringify(orderMenu));
@@ -72,6 +75,38 @@ const DashboardPage = () => {
     setChangeOrder(nominal);
   };
 
+  useEffect(() => {
+    localStorage.setItem("report", JSON.stringify(reportOrder));
+  }, [reportOrder]);
+
+  const handleSaveReport = (
+    totalPrice,
+    itemsName,
+    itemsQty,
+    changeOrder,
+    changeBack
+  ) => {
+    setReportOrder([
+      ...reportOrder,
+      {
+        totalPrice,
+        itemsName,
+        itemsQty,
+        changeOrder,
+        changeBack,
+        date: new Date().toLocaleString() + "",
+      },
+    ]);
+    setSuccessPayment(true);
+  };
+
+  const handleDoneButtonPayment = () => {
+    setOrderMenu([]);
+    setOrderButton(false);
+    setChangeOrder();
+    setSuccessPayment(false);
+  };
+
   return (
     <Section>
       <div style={{ paddingLeft: "3rem" }}>
@@ -93,6 +128,9 @@ const DashboardPage = () => {
         isOrderButtonClick={orderButton}
         handleChange={handleChange}
         changeOrder={changeOrder}
+        handleSaveReport={handleSaveReport}
+        successPayment={successPayment}
+        handleDoneButtonPayment={handleDoneButtonPayment}
       />
     </Section>
   );
