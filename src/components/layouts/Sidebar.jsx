@@ -32,17 +32,17 @@ const Sidebar = () => {
             </Link>
           </li>
           <li className="fs-2 mt-3 text-center">
-            <Link to="/" className="text-decoration-none text-danger">
+            <Link to="/reports" className="text-decoration-none text-danger">
               <FaFileAlt />
             </Link>
           </li>
           <li className="fs-2 mt-3 text-center">
-            <Link to="/" className="text-decoration-none text-danger">
+            <Link to="" className="text-decoration-none text-danger">
               <FaUserCircle />
             </Link>
           </li>
           <li className="fs-2 mt-3 text-center">
-            <Link to="/" className="text-decoration-none text-danger">
+            <Link to="" className="text-decoration-none text-danger">
               <FaSignOutAlt />
             </Link>
           </li>
