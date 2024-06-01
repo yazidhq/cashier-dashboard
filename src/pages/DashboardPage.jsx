@@ -18,6 +18,10 @@ const DashboardPage = () => {
     localStorage.setItem("order", JSON.stringify(orderMenu));
   }, [orderMenu]);
 
+  useEffect(() => {
+    localStorage.setItem("report", JSON.stringify(reportOrder));
+  }, [reportOrder]);
+
   const handleAddOrder = (name, category, price) => {
     const data = {
       name,
@@ -56,13 +60,6 @@ const DashboardPage = () => {
     localStorage.setItem("order", JSON.stringify(updatedOrderMenu));
   };
 
-  const totalPrice = orderMenu.reduce(
-    (total, item) => total + item.price * item.qty,
-    0
-  );
-
-  const taxPrice = totalPrice * 0.05;
-
   const handleCategory = (category) => {
     setShowCategory(category);
   };
@@ -74,10 +71,6 @@ const DashboardPage = () => {
   const handleChange = (nominal) => {
     setChangeOrder(nominal);
   };
-
-  useEffect(() => {
-    localStorage.setItem("report", JSON.stringify(reportOrder));
-  }, [reportOrder]);
 
   const handleSaveReport = (
     totalPrice,
@@ -106,6 +99,13 @@ const DashboardPage = () => {
     setChangeOrder();
     setSuccessPayment(false);
   };
+
+  const totalPrice = orderMenu.reduce(
+    (total, item) => total + item.price * item.qty,
+    0
+  );
+
+  const taxPrice = totalPrice * 0.05;
 
   return (
     <Section>

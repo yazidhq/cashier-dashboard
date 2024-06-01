@@ -1,11 +1,6 @@
 import { FaFileAlt, FaEye } from "react-icons/fa";
 
-const ReportTable = ({
-  filteredData,
-  handleMouseDown,
-  handleMouseUp,
-  details,
-}) => {
+const ReportTable = ({ filteredData, handleDetails, details }) => {
   const renderDate = (date) => {
     return (
       <div>
@@ -50,10 +45,7 @@ const ReportTable = ({
           <div className="col-md-2">{renderCurrency(item.changeOrder)}</div>
           <div className="col-md-2">{renderCurrency(item.changeBack)}</div>
           <div className="col-md-1 d-flex gap-3">
-            <FaEye
-              onMouseDown={() => handleMouseDown(item.date)}
-              onMouseUp={() => handleMouseUp(item.date)}
-            />
+            <FaEye onClick={() => handleDetails(item.date)} />
             <FaFileAlt />
           </div>
         </div>
