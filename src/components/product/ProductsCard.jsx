@@ -25,7 +25,7 @@ const Products = ({ handleAddOrder, showCategory, handleCategory }) => {
     <div style={{ paddingLeft: "2.5rem" }}>
       <div
         className="flex-grow-1 px-5 pt-4 bg-light pb-1"
-        style={{ minWidth: "700px" }}
+        style={{ minWidth: "750px" }}
       >
         <Category handleCategory={handleCategory} />
         <div className="mb-5">
