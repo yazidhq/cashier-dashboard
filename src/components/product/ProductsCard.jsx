@@ -6,8 +6,8 @@ import { IoFilterOutline } from "react-icons/io5";
 import { MdWidthFull } from "react-icons/md";
 
 const Products = ({ handleAddOrder, showCategory, handleCategory }) => {
-  const product = JSON.parse(localStorage.getItem("products"));
-  const [products] = useState(product ? product : []);
+  const product = JSON.parse(localStorage.getItem("products")) || [];
+  const [products, setProducts] = useState(product);
 
   const renderProducts = products.map((item) => {
     return showCategory === "all" || item.category == showCategory ? (

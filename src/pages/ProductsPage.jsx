@@ -7,8 +7,9 @@ import { deleteObject, ref } from "firebase/storage";
 import { storage } from "../firebase-config";
 
 const ProductsPage = () => {
-  const product = JSON.parse(localStorage.getItem("products"));
-  const [products, setProducts] = useState(product ? product : []);
+  const product = JSON.parse(localStorage.getItem("products")) || [];
+  const [products, setProducts] = useState(product);
+
   const [isLoading, setIsLoading] = useState(false);
   const [addButtonShow, setAddButtonShow] = useState(false);
   const [editButtonShow, setEditButtonShow] = useState({

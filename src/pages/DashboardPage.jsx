@@ -1,24 +1,23 @@
 import { useEffect, useState } from "react";
-import Category from "../components/category/Category";
 import ProductsCard from "../components/product/ProductsCard";
 import Orders from "../components/orders/Orders";
 import Section from "../components/layouts/Section";
 
 const DashboardPage = () => {
-  const order = JSON.parse(localStorage.getItem("order"));
-  const [orderMenu, setOrderMenu] = useState(order || []);
+  const order = JSON.parse(localStorage.getItem("order")) || [];
+  const [orderMenu, setOrderMenu] = useState(order);
 
   const [showCategory, setShowCategory] = useState("all");
   const [orderButton, setOrderButton] = useState(false);
   const [changeOrder, setChangeOrder] = useState();
 
-  const report = JSON.parse(localStorage.getItem("report"));
-  const [reportOrder, setReportOrder] = useState(report || []);
+  const report = JSON.parse(localStorage.getItem("report")) || [];
+  const [reportOrder, setReportOrder] = useState(report);
 
   const [successPayment, setSuccessPayment] = useState(false);
 
   useEffect(() => {
-    const products = JSON.parse(localStorage.getItem("products"));
+    const products = JSON.parse(localStorage.getItem("products")) || [];
     if (products.length === 0) {
       setOrderMenu([]);
     }
