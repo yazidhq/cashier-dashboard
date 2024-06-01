@@ -12,7 +12,7 @@ const ProductsForm = ({
       method="POST"
       onSubmit={
         handleUpdateProduct
-          ? (e) => handleUpdateProduct(data_value.name, e)
+          ? (e) => handleUpdateProduct(data_value.img, e)
           : handleAddProduct
       }
       className={`mb-3 ${handleUpdateProduct ? "mt-3" : ""}`}

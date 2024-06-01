@@ -80,14 +80,14 @@ const ProductsPage = () => {
     });
   };
 
-  const handleUpdateProduct = async (name, e) => {
+  const handleUpdateProduct = async (img, e) => {
     e.preventDefault();
     setIsLoading(true);
     const imageFile = e.target.img.files[0];
     let imageUrl = e.target.img.value.replace("C:\\fakepath\\", "");
     let oldImageUrl = "";
 
-    const oldProduct = products.find((item) => item.name === name);
+    const oldProduct = products.find((item) => item.img === img);
     if (oldProduct) {
       oldImageUrl = oldProduct.img;
     }
@@ -124,7 +124,7 @@ const ProductsPage = () => {
     };
 
     const updatedProducts = products.map((item) => {
-      if (item.name === name) {
+      if (item.img === img) {
         return {
           ...item,
           name: data.name,
