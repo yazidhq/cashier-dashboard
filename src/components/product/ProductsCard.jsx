@@ -9,8 +9,6 @@ const Products = ({ handleAddOrder, showCategory, handleCategory }) => {
   const product = JSON.parse(localStorage.getItem("products"));
   const [products] = useState(product ? product : []);
 
-  const isProduct = JSON.parse(localStorage.getItem("products"));
-
   const renderProducts = products.map((item) => {
     return showCategory === "all" || item.category == showCategory ? (
       <ProductCard
