@@ -2,11 +2,7 @@ const OrderMenu = ({ name, img, price, qty, cancel = () => {} }) => {
   return (
     <div className="row g-3 mb-5">
       <div className="col-md-3">
-        <img
-          src={`./data/img/${img}.png`}
-          className="img-fluid"
-          onClick={cancel}
-        />
+        <img src={img} className="img-fluid" onClick={cancel} />
       </div>
       <div className="fs-6 col-md-5">
         <div className="fw-bold">{name}</div>

@@ -15,6 +15,13 @@ const DashboardPage = () => {
   const [successPayment, setSuccessPayment] = useState(false);
 
   useEffect(() => {
+    const products = JSON.parse(localStorage.getItem("products"));
+    if (products.length === 0) {
+      setOrderMenu([]);
+    }
+  }, []);
+
+  useEffect(() => {
     localStorage.setItem("order", JSON.stringify(orderMenu));
   }, [orderMenu]);
 
@@ -22,17 +29,18 @@ const DashboardPage = () => {
     localStorage.setItem("report", JSON.stringify(reportOrder));
   }, [reportOrder]);
 
-  const handleAddOrder = (name, category, price) => {
+  const handleAddOrder = (img, name, category, price) => {
     const data = {
+      img,
       name,
       category,
       price,
       qty: 1,
     };
-    if (orderMenu.find((item) => item.name === data.name)) {
+    if (orderMenu.find((item) => item.img === data.img)) {
       setOrderMenu(
         orderMenu.map((item) =>
-          item.name === data.name ? { ...item, qty: item.qty + 1 } : item
+          item.img === data.img ? { ...item, qty: item.qty + 1 } : item
         )
       );
     } else {
@@ -40,6 +48,7 @@ const DashboardPage = () => {
         ...orderMenu,
         {
           id: data.id,
+          img: data.img,
           name: data.name,
           category: data.category,
           price: data.price,
@@ -109,15 +118,12 @@ const DashboardPage = () => {
 
   return (
     <Section>
-      <div style={{ paddingLeft: "3rem" }}>
-        <div className="flex-grow-1 px-5 pt-4 bg-light pb-1">
-          <Category handleCategory={handleCategory} />
-          <ProductsCard
-            showCategory={showCategory}
-            handleAddOrder={handleAddOrder}
-          />
-        </div>
-      </div>
+      <ProductsCard
+        showCategory={showCategory}
+        handleAddOrder={handleAddOrder}
+        handleCategory={handleCategory}
+      />
+
       <Orders
         orderMenu={orderMenu}
         totalPrice={totalPrice}

@@ -154,21 +154,17 @@ const ProductsPage = () => {
 
   return (
     <Section>
-      <div className="w-100" style={{ paddingLeft: "3rem" }}>
-        <div className="flex-grow-1 px-5 pt-4 bg-light pb-1">
-          <ProductsTable
-            handleAddButton={handleAddButton}
-            handleAddProduct={handleAddProduct}
-            handleRemoveProduct={handleRemoveProduct}
-            handleUpdateProduct={handleUpdateProduct}
-            showProducts={products}
-            addButton={addButtonShow}
-            handleEditButton={handleEditButton}
-            editButton={editButtonShow}
-            isLoading={isLoading}
-          />
-        </div>
-      </div>
+      <ProductsTable
+        handleAddButton={handleAddButton}
+        handleAddProduct={handleAddProduct}
+        handleRemoveProduct={handleRemoveProduct}
+        handleUpdateProduct={handleUpdateProduct}
+        showProducts={products}
+        addButton={addButtonShow}
+        handleEditButton={handleEditButton}
+        editButton={editButtonShow}
+        isLoading={isLoading}
+      />
     </Section>
   );
 };

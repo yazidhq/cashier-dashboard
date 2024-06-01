@@ -22,7 +22,7 @@ const Orders = ({
     <OrderMenu
       key={item.name}
       name={item.name}
-      img={item.name.replace(/\s+/g, "-").toLowerCase()}
+      img={item.img}
       price={item.price}
       qty={item.qty}
       cancel={() => handleCancelSingleOrder(item.name)}

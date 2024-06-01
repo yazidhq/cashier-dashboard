@@ -1,6 +1,14 @@
+import { useState } from "react";
+
 const ProductCard = ({ item, handleAddOrder }) => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  const handleImageLoaded = () => {
+    setIsLoading(false);
+  };
+
   const handleClick = () => {
-    handleAddOrder(item.name, item.category, item.price);
+    handleAddOrder(item.img, item.name, item.category, item.price);
   };
 
   return (
@@ -9,8 +17,9 @@ const ProductCard = ({ item, handleAddOrder }) => {
         <div className="card-body text-center d-flex flex-column">
           <div className="d-flex flex-grow-1 align-items-center justify-content-center">
             <img
-              src={`./data/${item.img}`}
-              className="img-fluid"
+              src={item.img}
+              onLoad={handleImageLoaded}
+              className={`img-fluid ${isLoading ? "skeleton-img" : ""}`}
               alt={item.name}
             />
           </div>

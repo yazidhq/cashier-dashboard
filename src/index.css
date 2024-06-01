@@ -30,3 +30,22 @@
 .icon-xlarge {
   font-size: 3rem;
 }
+
+.skeleton-img {
+  width: 1000px;
+  height: 150px;
+  background-color: #ebebeb;
+  animation: loading 0.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}

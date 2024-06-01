@@ -26,17 +26,13 @@ const ReportsPage = () => {
 
   return (
     <Section>
-      <div className="w-100" style={{ paddingLeft: "3rem" }}>
-        <div className="flex-grow-1 px-5 pt-4 bg-light pb-1">
-          <ReportsTable
-            searchTerm={searchTerm}
-            handleSearch={handleSearch}
-            filteredData={filteredData}
-            handleDetails={handleDetails}
-            details={details}
-          />
-        </div>
-      </div>
+      <ReportsTable
+        searchTerm={searchTerm}
+        handleSearch={handleSearch}
+        filteredData={filteredData}
+        handleDetails={handleDetails}
+        details={details}
+      />
     </Section>
   );
 };

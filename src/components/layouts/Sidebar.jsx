@@ -50,7 +50,7 @@ const Sidebar = () => {
               <FaFileAlt />
             </Link>
           </li>
-          <li className="fs-2 mt-3 text-center">
+          {/* <li className="fs-2 mt-3 text-center">
             <Link to="" className={`text-decoration-none text-danger`}>
               <FaUserCircle />
             </Link>
@@ -59,7 +59,7 @@ const Sidebar = () => {
             <Link to="" className={`text-decoration-none text-danger`}>
               <FaSignOutAlt />
             </Link>
-          </li>
+          </li> */}
         </div>
       </ul>
     </div>
