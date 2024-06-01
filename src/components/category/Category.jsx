@@ -16,7 +16,7 @@ const Category = ({ handleCategory }) => {
   return (
     <div className="mb-5">
       <TitleMenu firstWord={"Menu"} lastWord={"Category"} />
-      <div className="row row-cols-1 row-cols-lg-4 g-3">{categories}</div>
+      <div className="row row-cols-1 row-cols-md-4 g-3">{categories}</div>
     </div>
   );
 };
