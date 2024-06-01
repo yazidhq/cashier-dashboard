@@ -69,6 +69,7 @@ const ProductsForm = ({
           type="file"
           className={`form-control ${handleUpdateProduct ? "" : "border-0"}`}
           name="img"
+          accept="image/*"
           required={!handleUpdateProduct}
         />
       </div>

@@ -3,6 +3,7 @@ import Button from "../Button";
 import category from "../../../public/data/category.json";
 import ProductTable from "./ProductTable";
 import ProductsForm from "./ProductsForm";
+import LoadingSpinner from "../LoadingSpinner";
 
 const ProductsTable = ({
   handleAddProduct,
@@ -13,6 +14,7 @@ const ProductsTable = ({
   addButton,
   handleEditButton,
   editButton,
+  isLoading,
 }) => {
   const menu_category = category.menu_category;
 
@@ -37,13 +39,19 @@ const ProductsTable = ({
         />
       )}
 
-      <ProductTable
-        showProducts={showProducts}
-        handleRemoveProduct={handleRemoveProduct}
-        handleUpdateProduct={handleUpdateProduct}
-        handleEditButton={handleEditButton}
-        editButton={editButton}
-      />
+      {isLoading ? (
+        <div className="mt-3">
+          <LoadingSpinner />
+        </div>
+      ) : (
+        <ProductTable
+          showProducts={showProducts}
+          handleRemoveProduct={handleRemoveProduct}
+          handleUpdateProduct={handleUpdateProduct}
+          handleEditButton={handleEditButton}
+          editButton={editButton}
+        />
+      )}
     </div>
   );
 };

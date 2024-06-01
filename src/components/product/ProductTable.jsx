@@ -12,15 +12,11 @@ const ProductTable = ({
   const menu_category = category.menu_category;
 
   const products = showProducts.map((item) => (
-    <div className="card border-0" key={item.name}>
+    <div className="card border-0" key={item.img}>
       <div className="card-body">
         <div className="row">
           <div className="col-md-2 rounded-circle">
-            <img
-              src={`./data/img/${item.img}`}
-              className="img-fluid"
-              width={"50px"}
-            />
+            <img src={item.img} className="img-fluid" width={"50px"} />
           </div>
           <div className="col-md-4 mt-2">{item.name}</div>
           <div className="col-md-2 mt-2">
@@ -30,11 +26,11 @@ const ProductTable = ({
           <div className="col-md-2 mt-2">{item.qty}</div>
           <div className="col-md-2 mt-2">
             <div className="d-flex gap-3 mt-1">
-              <FaEdit onClick={() => handleEditButton(item.name)} />
-              <FaTrash onClick={() => handleRemoveProduct(item.name)} />
+              <FaEdit onClick={() => handleEditButton(item.img)} />
+              <FaTrash onClick={() => handleRemoveProduct(item.img)} />
             </div>
           </div>
-          {editButton.status && editButton.name === item.name && (
+          {editButton.status && editButton.img === item.img && (
             <ProductsForm
               handleUpdateProduct={handleUpdateProduct}
               menu_category={menu_category}
