@@ -6,12 +6,15 @@ import Section from "../components/layouts/Section";
 
 const DashboardPage = () => {
   const order = JSON.parse(localStorage.getItem("order"));
-  const [orderMenu, setOrderMenu] = useState(order ? order : []);
+  const [orderMenu, setOrderMenu] = useState(order || []);
+
   const [showCategory, setShowCategory] = useState("all");
   const [orderButton, setOrderButton] = useState(false);
   const [changeOrder, setChangeOrder] = useState();
+
   const report = JSON.parse(localStorage.getItem("report"));
-  const [reportOrder, setReportOrder] = useState(report ? report : []);
+  const [reportOrder, setReportOrder] = useState(report || []);
+
   const [successPayment, setSuccessPayment] = useState(false);
 
   useEffect(() => {
