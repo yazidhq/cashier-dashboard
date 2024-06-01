@@ -1,3 +1,5 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+  "rewrites": [{ "source": "/(.*)", "destination": "/" }],
+  "builds": [{ "src": "your-build-command", "use": "@vercel/node" }],
+  "version": 2
 }
