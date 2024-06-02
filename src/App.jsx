@@ -13,6 +13,7 @@ import RegisterPage from "./pages/auth/RegisterPage";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { GetUserProvider } from "./context/GetUserContext";
+import ProfilePage from "./pages/ProfilePage";
 
 const ProtectedRoute = ({ children }) => {
   const { currentUser } = useAuth();
@@ -48,6 +49,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <ReportsPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <ProfilePage />
                 </ProtectedRoute>
               }
             />

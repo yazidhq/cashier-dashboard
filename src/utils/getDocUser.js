@@ -10,6 +10,6 @@ export const getUserById = async (userId) => {
     userData.id = userId;
     return userData;
   } else {
-    console.log("Tidak ada dokumen yang cocok dengan ID pengguna ini.");
+    null;
   }
 };
