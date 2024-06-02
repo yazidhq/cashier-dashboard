@@ -4,12 +4,13 @@ import {
   FaUtensils,
   FaSignOutAlt,
   FaFileAlt,
+  FaUserCircle,
 } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
 const Sidebar = () => {
-  const { currentUser, logout } = useAuth();
+  const { logout } = useAuth();
   const location = useLocation();
   const currentUrl = location.pathname;
 
@@ -54,13 +55,13 @@ const Sidebar = () => {
               <FaFileAlt />
             </Link>
           </li>
-          {/* <li className="fs-2 mt-3 text-center">
+          <li className="fs-2 mt-3 text-center">
             <Link to="" className={`text-decoration-none text-danger`}>
               <FaUserCircle />
             </Link>
-          </li> */}
+          </li>
           <li className="fs-2 mt-3 text-center text-danger">
-            <FaSignOutAlt onClick={handleLogout} title={currentUser.uid} />
+            <FaSignOutAlt onClick={handleLogout} />
           </li>
         </div>
       </ul>
