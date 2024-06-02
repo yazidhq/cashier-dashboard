@@ -13,8 +13,12 @@ export const GetUserProvider = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userData = await getUserById(currentUser.uid);
-        setUserData(userData);
+        if (currentUser) {
+          const userData = await getUserById(currentUser.uid);
+          setUserData(userData);
+        } else {
+          setUserData(null);
+        }
       } catch (error) {
         console.error("Error:", error);
       }
