@@ -1,9 +1,23 @@
 import { Link } from "react-router-dom";
 import Button from "../Button";
 import { FcGoogle } from "react-icons/fc";
+import Swal from "sweetalert2";
 import { FaGithub, FaFacebook, FaConciergeBell } from "react-icons/fa";
+import { useEffect } from "react";
 
-const Auth = ({ handleLogin, handleRegister }) => {
+const Auth = ({ handleLogin, handleRegister, isInvalid, handleInvalid }) => {
+  useEffect(() => {
+    if (isInvalid) {
+      Swal.fire("Invalid", "Failed to login. Try Again!", "error").then(
+        (result) => {
+          if (result.isConfirmed || result.isDismissed) {
+            handleInvalid();
+          }
+        }
+      );
+    }
+  }, [isInvalid]);
+
   return (
     <div
       className="bg-light d-flex align-items-center justify-content-center"

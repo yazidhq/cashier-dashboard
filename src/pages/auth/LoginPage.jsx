@@ -3,11 +3,13 @@ import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "../../firebase-config";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import Swal from "sweetalert2";
 import Auth from "../../components/auth/Auth";
 
 const LoginPage = () => {
   const { currentUser } = useAuth();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isInvalid, setIsInvalid] = useState(false);
 
   if (currentUser) {
     return <Navigate to="/" />;
@@ -21,9 +23,15 @@ const LoginPage = () => {
     };
     try {
       await signInWithEmailAndPassword(auth, data.email, data.password);
-      setIsLoggedIn(true);
+      Swal.fire("Success!", "You have logged in successfully.", "success").then(
+        (result) => {
+          if (result.isConfirmed || result.isDismissed) {
+            setIsLoggedIn(true);
+          }
+        }
+      );
     } catch (error) {
-      alert("Error logging in: " + error.message);
+      setIsInvalid(true);
     }
   };
 
@@ -31,7 +39,17 @@ const LoginPage = () => {
     return <Navigate to="/" />;
   }
 
-  return <Auth handleLogin={handleLogin} />;
+  const handleInvalid = () => {
+    setIsInvalid(false);
+  };
+
+  return (
+    <Auth
+      handleLogin={handleLogin}
+      isInvalid={isInvalid}
+      handleInvalid={handleInvalid}
+    />
+  );
 };
 
 export default LoginPage;
