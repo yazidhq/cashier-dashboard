@@ -2,17 +2,21 @@ import {
   FaConciergeBell,
   FaHome,
   FaUtensils,
-  FaUserCircle,
   FaSignOutAlt,
   FaFileAlt,
 } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 const Sidebar = () => {
+  const { currentUser, logout } = useAuth();
   const location = useLocation();
   const currentUrl = location.pathname;
 
-  // Fungsi untuk menentukan kelas CSS setiap tautan berdasarkan URL
+  const handleLogout = async () => {
+    await logout();
+  };
+
   const getLinkClass = (path) => {
     return currentUrl === path ? "text-dark" : "text-danger";
   };
@@ -22,7 +26,7 @@ const Sidebar = () => {
       <ul className="list-unstyled">
         <div className="position-fixed">
           <li className="fs-1">
-            <Link to="/" className={`text-decoration-none text-danger`}>
+            <Link to="/" className="text-decoration-none text-danger">
               <FaConciergeBell />
             </Link>
           </li>
@@ -54,12 +58,10 @@ const Sidebar = () => {
             <Link to="" className={`text-decoration-none text-danger`}>
               <FaUserCircle />
             </Link>
-          </li>
-          <li className="fs-2 mt-3 text-center">
-            <Link to="" className={`text-decoration-none text-danger`}>
-              <FaSignOutAlt />
-            </Link>
           </li> */}
+          <li className="fs-2 mt-3 text-center text-danger">
+            <FaSignOutAlt onClick={handleLogout} title={currentUser.uid} />
+          </li>
         </div>
       </ul>
     </div>
