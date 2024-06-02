@@ -3,11 +3,10 @@ import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "../../firebase-config";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import Auth from "../../components/auth/Auth";
 
 const LoginPage = () => {
   const { currentUser } = useAuth();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   if (currentUser) {
@@ -16,8 +15,12 @@ const LoginPage = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    const data = {
+      email: e.target.email.value,
+      password: e.target.password.value,
+    };
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(auth, data.email, data.password);
       setIsLoggedIn(true);
     } catch (error) {
       alert("Error logging in: " + error.message);
@@ -28,29 +31,7 @@ const LoginPage = () => {
     return <Navigate to="/" />;
   }
 
-  return (
-    <div>
-      <form onSubmit={handleLogin}>
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button type="submit">Login</button>
-      </form>
-    </div>
-  );
+  return <Auth handleLogin={handleLogin} />;
 };
 
 export default LoginPage;

@@ -10,6 +10,8 @@ import ReportsPage from "./pages/ReportsPage";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const ProtectedRoute = ({ children }) => {
   const { currentUser } = useAuth();
@@ -52,5 +54,5 @@ function App() {
     </AuthProvider>
   );
 }
-
+AOS.init();
 export default App;
