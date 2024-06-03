@@ -18,7 +18,7 @@ const Orders = ({}) => {
 
   const orders = orderMenu.map((item) => (
     <OrderMenu
-      key={item.name}
+      key={item.img}
       name={item.name}
       img={item.img}
       price={item.price}

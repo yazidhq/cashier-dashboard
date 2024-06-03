@@ -13,12 +13,12 @@ const Products = ({}) => {
 
   const renderProducts = products.map((item) => {
     return showCategory === "all" || item.category == showCategory ? (
-      <ProductCard key={item.name} item={item} handleAddOrder={addOrder} />
+      <ProductCard key={item.img} item={item} handleAddOrder={addOrder} />
     ) : null;
   });
 
   return (
-    <div style={{ paddingLeft: "2.5rem" }}>
+    <div style={{ paddingLeft: "2.5rem", minWidth: "730px" }}>
       <div className="flex-grow-1 px-5 pt-4 bg-light pb-1">
         <Category handleCategory={handleCategory} />
         <div className="mb-5">
