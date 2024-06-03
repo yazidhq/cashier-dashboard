@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../firebase-config";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const AuthContext = createContext();
 
@@ -30,6 +31,14 @@ export const AuthProvider = ({ children }) => {
   const login = (user) => {
     setCurrentUser(user);
   };
+
+  if (loading) {
+    return (
+      <div className="position-absolute top-50 start-50 translate-middle">
+        <LoadingSpinner />
+      </div>
+    );
+  }
 
   return (
     <AuthContext.Provider value={{ currentUser, login, logout }}>
