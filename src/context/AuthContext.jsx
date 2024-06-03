@@ -1,6 +1,13 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from "../firebase-config";
+import {
+  onAuthStateChanged,
+  signOut,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
+import { setDoc, doc } from "firebase/firestore";
+import { auth, db } from "../firebase-config";
+import Swal from "sweetalert2";
 import LoadingSpinner from "../components/LoadingSpinner";
 
 const AuthContext = createContext();
@@ -9,7 +16,10 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
+  const [isRegistered, setIsRegistered] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [isInvalid, setIsInvalid] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -19,6 +29,72 @@ export const AuthProvider = ({ children }) => {
     return unsubscribe;
   }, []);
 
+  const handleRegister = async (e) => {
+    e.preventDefault();
+
+    const data = {
+      fullname: e.target.fullname.value,
+      username: e.target.username.value,
+      whatsapp: e.target.whatsapp.value,
+      email: e.target.email.value,
+      password: e.target.password.value,
+    };
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
+
+      const userId = userCredential.user.uid;
+
+      await setDoc(doc(db, "users", userId), {
+        fullname: data.fullname,
+        username: data.username,
+        whatsapp: data.whatsapp,
+        email: data.email,
+      });
+
+      Swal.fire(
+        "Success!",
+        "You have registered successfully.",
+        "success"
+      ).then((result) => {
+        if (result.isConfirmed || result.isDismissed) {
+          setIsRegistered(true);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      setIsInvalid(true);
+    }
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const data = {
+      email: e.target.email.value,
+      password: e.target.password.value,
+    };
+    try {
+      await signInWithEmailAndPassword(auth, data.email, data.password);
+      Swal.fire("Success!", "You have logged in successfully.", "success").then(
+        (result) => {
+          if (result.isConfirmed || result.isDismissed) {
+            setIsLoggedIn(true);
+          }
+        }
+      );
+    } catch (error) {
+      setIsInvalid(true);
+    }
+  };
+
+  const handleInvalid = () => {
+    setIsInvalid(false);
+  };
+
   const logout = async () => {
     try {
       await signOut(auth);
@@ -26,10 +102,6 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       console.error("Error logging out:", error);
     }
-  };
-
-  const login = (user) => {
-    setCurrentUser(user);
   };
 
   if (loading) {
@@ -41,7 +113,18 @@ export const AuthProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ currentUser, login, logout }}>
+    <AuthContext.Provider
+      value={{
+        currentUser,
+        handleLogin,
+        isLoggedIn,
+        handleRegister,
+        isRegistered,
+        handleInvalid,
+        isInvalid,
+        logout,
+      }}
+    >
       {!loading && children}
     </AuthContext.Provider>
   );
