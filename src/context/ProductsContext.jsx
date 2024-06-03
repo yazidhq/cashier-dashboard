@@ -4,6 +4,7 @@ import { uploadImage } from "../utils/firebaseUtils";
 import Swal from "sweetalert2";
 import { deleteObject, ref } from "firebase/storage";
 import { storage } from "../firebase-config";
+import { useGetUser } from "./GetUserContext";
 
 const ProductsContext = createContext();
 
@@ -13,6 +14,14 @@ export const ProductsProvider = ({ children }) => {
   const storedProducts = JSON.parse(localStorage.getItem("products")) || [];
   const [products, setProducts] = useState(storedProducts);
   const [isLoading, setIsLoading] = useLoading();
+  const { userData } = useGetUser();
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    if (userData && userData.id) {
+      setUserId(userData.id);
+    }
+  }, [userData]);
 
   useEffect(() => {
     localStorage.setItem("products", JSON.stringify(products));
@@ -34,6 +43,7 @@ export const ProductsProvider = ({ children }) => {
       setProducts([
         ...products,
         {
+          userId: userId,
           name: data.name,
           category: data.category,
           price: data.price,
