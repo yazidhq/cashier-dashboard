@@ -3,19 +3,18 @@ import TitleMenu from "../TitleMenu";
 import { useState } from "react";
 import Category from "../category/Category";
 import { IoFilterOutline } from "react-icons/io5";
-import { MdWidthFull } from "react-icons/md";
+import { useProducts } from "../../context/ProductsContext";
+import useCategory from "../../hooks/useCategory";
+import { useOrder } from "../../context/OrderContext";
 
-const Products = ({ handleAddOrder, showCategory, handleCategory }) => {
-  const product = JSON.parse(localStorage.getItem("products")) || [];
-  const [products, setProducts] = useState(product);
+const Products = ({}) => {
+  const { products } = useProducts();
+  const [showCategory, handleCategory] = useCategory();
+  const { addOrder } = useOrder();
 
   const renderProducts = products.map((item) => {
     return showCategory === "all" || item.category == showCategory ? (
-      <ProductCard
-        key={item.name}
-        item={item}
-        handleAddOrder={handleAddOrder}
-      />
+      <ProductCard key={item.name} item={item} handleAddOrder={addOrder} />
     ) : null;
   });
 
@@ -33,7 +32,14 @@ const Products = ({ handleAddOrder, showCategory, handleCategory }) => {
               <p className="mx-2">
                 <IoFilterOutline />
               </p>
-              <p onClick={() => handleCategory("all")}>show all menu</p>
+              <p
+                style={{
+                  cursor: "pointer",
+                }}
+                onClick={() => handleCategory("all")}
+              >
+                show all menu
+              </p>
             </div>
           </div>
           <div className="row row-cols-1 row-cols-md-3 g-4">

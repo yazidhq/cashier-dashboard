@@ -1,4 +1,8 @@
-const ReportsSearch = ({ searchTerm, handleSearch }) => {
+import { useReports } from "../../context/ReportsContext";
+
+const ReportsSearch = ({}) => {
+  const { searchTerm, handleSearch } = useReports();
+
   return (
     <input
       type="text"

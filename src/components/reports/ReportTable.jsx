@@ -1,6 +1,9 @@
 import { FaFileAlt, FaEye } from "react-icons/fa";
+import { useReports } from "../../context/ReportsContext";
 
-const ReportTable = ({ filteredData, handleDetails, details }) => {
+const ReportTable = ({}) => {
+  const { filteredData, handleDetails, details } = useReports();
+
   const renderDate = (date) => {
     return (
       <div>

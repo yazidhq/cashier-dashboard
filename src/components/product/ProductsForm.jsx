@@ -1,37 +1,35 @@
 import Button from "../Button";
 
 const ProductsForm = ({
-  handleAddProduct,
-  handleUpdateProduct,
   menu_category,
   data_value,
+  addProduct,
+  updateProduct,
 }) => {
   return (
     <form
       action=""
       method="POST"
       onSubmit={
-        handleUpdateProduct
-          ? (e) => handleUpdateProduct(data_value.img, e)
-          : handleAddProduct
+        updateProduct ? (e) => updateProduct(data_value.img, e) : addProduct
       }
-      className={`mb-3 ${handleUpdateProduct ? "mt-3" : ""}`}
+      className={`mb-3 ${updateProduct ? "mt-3" : ""}`}
     >
       <div className="d-flex justify-content-between gap-1 mb-1">
         <input
           type="text"
-          className={`form-control ${handleUpdateProduct ? "" : "border-0"}`}
+          className={`form-control ${updateProduct ? "" : "border-0"}`}
           placeholder="Product name"
           name="name"
-          defaultValue={handleUpdateProduct ? data_value.name : ""}
+          defaultValue={updateProduct ? data_value.name : ""}
           required
         />
         <select
           name="category"
-          className={`form-control ${handleUpdateProduct ? "" : "border-0"}`}
+          className={`form-control ${updateProduct ? "" : "border-0"}`}
           required
         >
-          {handleUpdateProduct && (
+          {updateProduct && (
             <option hidden defaultValue={data_value.category}>
               {data_value.category}
             </option>
@@ -49,33 +47,33 @@ const ProductsForm = ({
       <div className="d-flex justify-content-between gap-1 mb-1">
         <input
           type="number"
-          className={`form-control ${handleUpdateProduct ? "" : "border-0"}`}
+          className={`form-control ${updateProduct ? "" : "border-0"}`}
           placeholder="Price"
           name="price"
           min={0}
-          defaultValue={handleUpdateProduct ? data_value.price : ""}
+          defaultValue={updateProduct ? data_value.price : ""}
           required
         />
         <input
           type="number"
-          className={`form-control ${handleUpdateProduct ? "" : "border-0"}`}
+          className={`form-control ${updateProduct ? "" : "border-0"}`}
           placeholder="Stock"
           name="qty"
           min={0}
-          defaultValue={handleUpdateProduct ? data_value.qty : ""}
+          defaultValue={updateProduct ? data_value.qty : ""}
           required
         />
         <input
           type="file"
-          className={`form-control ${handleUpdateProduct ? "" : "border-0"}`}
+          className={`form-control ${updateProduct ? "" : "border-0"}`}
           name="img"
           accept="image/*"
-          required={!handleUpdateProduct}
+          required={!updateProduct}
         />
       </div>
       <div className="mt-3">
         <Button
-          text={handleUpdateProduct ? "Update product" : "Add product"}
+          text={updateProduct ? "Update product" : "Add product"}
           color={"danger"}
           type={"submit"}
         />

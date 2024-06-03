@@ -1,24 +1,23 @@
+import { useOrder } from "../../context/OrderContext";
+import { useReports } from "../../context/ReportsContext";
 import Button from "../Button";
 import OrderInputNominal from "./OrderInputNominal";
 import OrderTotal from "./OrderTotal";
 import { FaCheckCircle } from "react-icons/fa";
 
-const OrderModal = ({
-  orderButton,
-  totalPrice,
-  taxPrice,
-  handleChange,
-  changeOrder,
-  handleSaveReport,
-  orderItemsName,
-  orderItemsQty,
-  successPayment,
-  handleDoneButtonPayment,
-}) => {
+const OrderModal = ({ changeOrder, orderItemsName, orderItemsQty }) => {
+  const { handleSaveReport, successPayment } = useReports();
+
+  const {
+    totalPrice,
+    taxPrice,
+    handleOrderButton,
+    handleChange,
+    handleDoneButtonPayment,
+  } = useOrder();
+
   const total = totalPrice + taxPrice;
-
   const nominals = [total, 50000, 100000, 150000, 200000, 250000];
-
   const changeBack = changeOrder - total;
 
   const payNow =
@@ -116,7 +115,7 @@ const OrderModal = ({
                 <button
                   type="button"
                   className="btn-close px-2"
-                  onClick={orderButton}
+                  onClick={handleOrderButton}
                   aria-label="Close"
                 ></button>
               )}

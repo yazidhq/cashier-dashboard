@@ -1,11 +1,7 @@
-import { useState } from "react";
+import useSkeleton from "../../hooks/useSkeleton";
 
 const ProductCard = ({ item, handleAddOrder }) => {
-  const [isLoading, setIsLoading] = useState(true);
-
-  const handleImageLoaded = () => {
-    setIsLoading(false);
-  };
+  const [isSkeleton, handleImageLoaded] = useSkeleton();
 
   const handleClick = () => {
     handleAddOrder(item.img, item.name, item.category, item.price);
@@ -19,7 +15,7 @@ const ProductCard = ({ item, handleAddOrder }) => {
             <img
               src={item.img}
               onLoad={handleImageLoaded}
-              className={`img-fluid ${isLoading ? "skeleton-img" : ""}`}
+              className={`img-fluid ${isSkeleton ? "skeleton-img-card" : ""}`}
               alt={item.name}
             />
           </div>

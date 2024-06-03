@@ -1,4 +1,8 @@
-const OrderTotal = ({ price, tax, changeOrder }) => {
+import { useOrder } from "../../context/OrderContext";
+
+const OrderTotal = ({}) => {
+  const { totalPrice, taxPrice, changeOrder } = useOrder();
+
   return (
     <div className=" mb-5">
       <div className="d-flex justify-item-between">
@@ -11,15 +15,18 @@ const OrderTotal = ({ price, tax, changeOrder }) => {
         </div>
         <div className="ms-auto">
           <span>
-            Rp. {price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+            Rp. {totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
           </span>
           <br />
           <span>
-            Rp. {tax.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+            Rp. {taxPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
           </span>
           <br />
           <span className="fw-bold">
-            Rp. {(price + tax).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+            Rp.{" "}
+            {(totalPrice + taxPrice)
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
           </span>
         </div>
       </div>
@@ -38,7 +45,7 @@ const OrderTotal = ({ price, tax, changeOrder }) => {
             <br />
             <span className="fw-bold">
               Rp.{" "}
-              {(changeOrder - (price + tax))
+              {(changeOrder - (totalPrice + taxPrice))
                 .toString()
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
             </span>

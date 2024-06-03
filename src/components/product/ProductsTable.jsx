@@ -4,18 +4,12 @@ import category from "../../../public/data/category.json";
 import ProductTable from "./ProductTable";
 import ProductsForm from "./ProductsForm";
 import LoadingSpinner from "../LoadingSpinner";
+import { useAddButton } from "../../hooks/useButton";
+import { useProducts } from "../../context/ProductsContext";
 
-const ProductsTable = ({
-  handleAddProduct,
-  handleRemoveProduct,
-  handleUpdateProduct,
-  showProducts,
-  handleAddButton,
-  addButton,
-  handleEditButton,
-  editButton,
-  isLoading,
-}) => {
+const ProductsTable = ({}) => {
+  const { isLoading, addProduct } = useProducts();
+  const [addButtonShow, handleAddButton] = useAddButton();
   const menu_category = category.menu_category;
 
   return (
@@ -34,10 +28,10 @@ const ProductsTable = ({
             </div>
           </div>
 
-          {addButton && (
+          {addButtonShow && (
             <ProductsForm
-              handleAddProduct={handleAddProduct}
               menu_category={menu_category}
+              addProduct={addProduct}
             />
           )}
 
@@ -46,13 +40,7 @@ const ProductsTable = ({
               <LoadingSpinner />
             </div>
           ) : (
-            <ProductTable
-              showProducts={showProducts}
-              handleRemoveProduct={handleRemoveProduct}
-              handleUpdateProduct={handleUpdateProduct}
-              handleEditButton={handleEditButton}
-              editButton={editButton}
-            />
+            <ProductTable />
           )}
         </div>
       </div>

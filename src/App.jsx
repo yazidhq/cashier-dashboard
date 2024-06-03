@@ -14,6 +14,9 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { GetUserProvider } from "./context/GetUserContext";
 import ProfilePage from "./pages/ProfilePage";
+import { ProductsProvider } from "./context/ProductsContext";
+import { ReportsProvider } from "./context/ReportsContext";
+import { OrderProvider } from "./context/OrderContext";
 
 const ProtectedRoute = ({ children }) => {
   const { currentUser } = useAuth();
@@ -24,44 +27,50 @@ function App() {
   return (
     <AuthProvider>
       <GetUserProvider>
-        <Router>
-          <Routes>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route
-              path="/"
-              element={
-                <ProtectedRoute>
-                  <DashboardPage />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/products"
-              element={
-                <ProtectedRoute>
-                  <ProductsPage />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/reports"
-              element={
-                <ProtectedRoute>
-                  <ReportsPage />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/profile"
-              element={
-                <ProtectedRoute>
-                  <ProfilePage />
-                </ProtectedRoute>
-              }
-            />
-          </Routes>
-        </Router>
+        <ProductsProvider>
+          <OrderProvider>
+            <ReportsProvider>
+              <Router>
+                <Routes>
+                  <Route path="/login" element={<LoginPage />} />
+                  <Route path="/register" element={<RegisterPage />} />
+                  <Route
+                    path="/"
+                    element={
+                      <ProtectedRoute>
+                        <DashboardPage />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/products"
+                    element={
+                      <ProtectedRoute>
+                        <ProductsPage />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/reports"
+                    element={
+                      <ProtectedRoute>
+                        <ReportsPage />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/profile"
+                    element={
+                      <ProtectedRoute>
+                        <ProfilePage />
+                      </ProtectedRoute>
+                    }
+                  />
+                </Routes>
+              </Router>
+            </ReportsProvider>
+          </OrderProvider>
+        </ProductsProvider>
       </GetUserProvider>
     </AuthProvider>
   );
