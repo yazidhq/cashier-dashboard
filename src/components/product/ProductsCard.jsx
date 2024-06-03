@@ -1,6 +1,5 @@
 import ProductCard from "./ProductCard";
 import TitleMenu from "../TitleMenu";
-import { useState } from "react";
 import Category from "../category/Category";
 import { IoFilterOutline } from "react-icons/io5";
 import { useProducts } from "../../context/ProductsContext";
@@ -20,10 +19,7 @@ const Products = ({}) => {
 
   return (
     <div style={{ paddingLeft: "2.5rem" }}>
-      <div
-        className="flex-grow-1 px-5 pt-4 bg-light pb-1"
-        style={{ minWidth: "750px" }}
-      >
+      <div className="flex-grow-1 px-5 pt-4 bg-light pb-1">
         <Category handleCategory={handleCategory} />
         <div className="mb-5">
           <div className="d-flex justify-content-between">
