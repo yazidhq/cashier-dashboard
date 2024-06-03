@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import useSuccessPayment from "../hooks/useSuccessPayment";
+import { useGetUser } from "./GetUserContext";
 
 const ReportsContext = createContext();
 
@@ -13,6 +14,15 @@ export const ReportsProvider = ({ children }) => {
   const [details, setDetails] = useState({ status: false, date: "" });
 
   const [successPayment, setSuccessPayment] = useSuccessPayment();
+
+  const { userData } = useGetUser();
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    if (userData && userData.id) {
+      setUserId(userData.id);
+    }
+  }, [userData]);
 
   useEffect(() => {
     localStorage.setItem("report", JSON.stringify(reportOrder));
@@ -44,6 +54,7 @@ export const ReportsProvider = ({ children }) => {
     setReportOrder([
       ...reportOrder,
       {
+        userId: userId,
         totalPrice,
         itemsName,
         itemsQty,

@@ -1,8 +1,19 @@
 import { FaFileAlt, FaEye } from "react-icons/fa";
 import { useReports } from "../../context/ReportsContext";
+import { useGetUser } from "../../context/GetUserContext";
+import { useEffect, useState } from "react";
 
 const ReportTable = ({}) => {
   const { filteredData, handleDetails, details } = useReports();
+
+  const { userData } = useGetUser();
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    if (userData && userData.id) {
+      setUserId(userData.id);
+    }
+  }, [userData]);
 
   const renderDate = (date) => {
     return (
@@ -39,20 +50,24 @@ const ReportTable = ({}) => {
   };
 
   const dataReports = filteredData.map((item, index) => (
-    <div className="card border-0" key={index}>
-      <div className="card-body">
-        <div className="row">
-          <div className="col-md-2">{renderDate(item.date)}</div>
-          <div className="col-md-3">{renderProducts(item)}</div>
-          <div className="col-md-2">{renderCurrency(item.totalPrice)}</div>
-          <div className="col-md-2">{renderCurrency(item.changeOrder)}</div>
-          <div className="col-md-2">{renderCurrency(item.changeBack)}</div>
-          <div className="col-md-1 d-flex gap-3">
-            <FaEye onClick={() => handleDetails(item.date)} />
-            <FaFileAlt />
+    <div key={index}>
+      {item.userId === userId && (
+        <div className="card border-0">
+          <div className="card-body">
+            <div className="row">
+              <div className="col-md-2">{renderDate(item.date)}</div>
+              <div className="col-md-3">{renderProducts(item)}</div>
+              <div className="col-md-2">{renderCurrency(item.totalPrice)}</div>
+              <div className="col-md-2">{renderCurrency(item.changeOrder)}</div>
+              <div className="col-md-2">{renderCurrency(item.changeBack)}</div>
+              <div className="col-md-1 d-flex gap-3">
+                <FaEye onClick={() => handleDetails(item.date)} />
+                <FaFileAlt />
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   ));
 
