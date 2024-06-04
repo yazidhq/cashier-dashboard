@@ -16,7 +16,7 @@ export const OrderProvider = ({ children }) => {
   const [changeOrder, setChangeOrder] = useState();
 
   useEffect(() => {
-    if (products.length === 0) {
+    if (products.length < 0) {
       setOrderMenu([]);
     }
   }, []);
@@ -59,8 +59,8 @@ export const OrderProvider = ({ children }) => {
     setOrderMenu([]);
   };
 
-  const cancelSingleOrder = (name) => {
-    const updatedOrderMenu = orderMenu.filter((item) => item.name !== name);
+  const cancelSingleOrder = (img) => {
+    const updatedOrderMenu = orderMenu.filter((item) => item.img !== img);
     setOrderMenu(updatedOrderMenu);
     localStorage.setItem("order", JSON.stringify(updatedOrderMenu));
   };

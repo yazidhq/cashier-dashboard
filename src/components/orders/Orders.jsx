@@ -23,7 +23,7 @@ const Orders = ({}) => {
       img={item.img}
       price={item.price}
       qty={item.qty}
-      cancel={() => cancelSingleOrder(item.name)}
+      cancel={() => cancelSingleOrder(item.img)}
     />
   ));
 

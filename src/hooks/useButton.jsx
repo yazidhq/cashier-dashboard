@@ -13,11 +13,11 @@ export const useAddButton = () => {
 export const useEditButton = () => {
   const [editButtonShow, setEditButtonShow] = useState({
     status: false,
-    img: "",
+    id: "",
   });
 
-  const handleEditButton = (productImg) => {
-    setEditButtonShow({ status: !editButtonShow.status, img: productImg });
+  const handleEditButton = (poductId) => {
+    setEditButtonShow({ status: !editButtonShow.status, id: poductId });
   };
 
   return [editButtonShow, handleEditButton];

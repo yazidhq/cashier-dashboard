@@ -3,29 +3,44 @@ import useLoading from "../hooks/useLoading";
 import { uploadImage } from "../utils/firebaseUtils";
 import Swal from "sweetalert2";
 import { deleteObject, ref } from "firebase/storage";
-import { storage } from "../firebase-config";
-import { useGetUser } from "./GetUserContext";
+import { db, storage } from "../firebase-config";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  query,
+  updateDoc,
+} from "firebase/firestore";
+import useUserId from "../hooks/useUserId";
 
 const ProductsContext = createContext();
 
 export const useProducts = () => useContext(ProductsContext);
 
 export const ProductsProvider = ({ children }) => {
-  const storedProducts = JSON.parse(localStorage.getItem("products")) || [];
-  const [products, setProducts] = useState(storedProducts);
+  const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useLoading();
-  const { userData } = useGetUser();
-  const [userId, setUserId] = useState(null);
+  const [userId] = useUserId();
 
   useEffect(() => {
-    if (userData && userData.id) {
-      setUserId(userData.id);
-    }
-  }, [userData]);
-
-  useEffect(() => {
-    localStorage.setItem("products", JSON.stringify(products));
-  }, [products]);
+    const q = query(collection(db, "products"));
+    const shapShot = onSnapshot(
+      q,
+      (querySnapshot) => {
+        const fetchedProducts = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setProducts(fetchedProducts);
+      },
+      (error) => {
+        console.error("Error in snapshot listener:", error);
+      }
+    );
+    return () => shapShot();
+  }, []);
 
   const addProduct = async (e) => {
     e.preventDefault();
@@ -40,17 +55,14 @@ export const ProductsProvider = ({ children }) => {
         qty: e.target.qty.value,
         img: imageUrl,
       };
-      setProducts([
-        ...products,
-        {
-          userId: userId,
-          name: data.name,
-          category: data.category,
-          price: data.price,
-          qty: data.qty,
-          img: data.img,
-        },
-      ]);
+      await addDoc(collection(db, "products"), {
+        userId: userId,
+        name: data.name,
+        category: data.category,
+        price: data.price,
+        qty: data.qty,
+        img: data.img,
+      });
       setIsLoading(false);
       Swal.fire("Added!", "Product have been created successfully", "success");
     } else {
@@ -59,7 +71,7 @@ export const ProductsProvider = ({ children }) => {
     }
   };
 
-  const removeProduct = async (imageUrl) => {
+  const removeProduct = async (id, imageUrl) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -70,34 +82,30 @@ export const ProductsProvider = ({ children }) => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const updatedProducts = products.filter(
-          (item) => item.img !== imageUrl
-        );
-        setProducts(updatedProducts);
+        setIsLoading(true);
         try {
           const storageRef = ref(storage, imageUrl);
+          const productsDocRef = doc(db, "products", id);
           await deleteObject(storageRef);
-          console.log("Image deleted successfully");
+          await deleteDoc(productsDocRef);
+          setIsLoading(false);
           Swal.fire("Deleted!", "Your product has been deleted.", "success");
         } catch (error) {
-          console.error("Error deleting image: ", error);
+          setIsLoading(false);
           Swal.fire("Error!", "Failed to delete image", "error");
         }
       }
     });
   };
 
-  const updateProduct = async (img, e) => {
+  const updateProduct = async (id, img, e) => {
     e.preventDefault();
     setIsLoading(true);
     const imageFile = e.target.img.files[0];
-    let imageUrl = e.target.img.value.replace("C:\\fakepath\\", "");
-    let oldImageUrl = "";
+    let imageUrl = img;
 
-    const oldProduct = products.find((item) => item.img === img);
-    if (oldProduct) {
-      oldImageUrl = oldProduct.img;
-    }
+    const oldProduct = products.find((item) => item.id === id);
+    const oldImageUrl = oldProduct ? oldProduct.img : "";
 
     if (imageFile) {
       imageUrl = await uploadImage(imageFile);
@@ -130,24 +138,21 @@ export const ProductsProvider = ({ children }) => {
       img: imageUrl,
     };
 
-    const updatedProducts = products.map((item) => {
-      if (item.img === img) {
-        return {
-          ...item,
-          name: data.name,
-          category: data.category,
-          price: data.price,
-          qty: data.qty,
-          img: data.img === "" ? item.img : data.img,
-        };
-      }
-      return item;
-    });
+    const productDocRef = doc(db, "products", id);
+    try {
+      await updateDoc(productDocRef, data);
 
-    setProducts(updatedProducts);
-    setIsLoading(false);
+      const updatedProducts = products.map((item) =>
+        item.id === id ? { ...item, ...data } : item
+      );
+      setProducts(updatedProducts);
 
-    Swal.fire("Updated!", "Your product has been updated.", "success");
+      setIsLoading(false);
+      Swal.fire("Updated!", "Your product has been updated.", "success");
+    } catch (err) {
+      setIsLoading(false);
+      Swal.fire("Failed!", "Failed to update the product.", "error");
+    }
   };
 
   return (

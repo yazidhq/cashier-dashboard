@@ -11,7 +11,9 @@ const ProductsForm = ({
       action=""
       method="POST"
       onSubmit={
-        updateProduct ? (e) => updateProduct(data_value.img, e) : addProduct
+        updateProduct
+          ? (e) => updateProduct(data_value.id, data_value.img, e)
+          : addProduct
       }
       className={`mb-3 ${updateProduct ? "mt-3" : ""}`}
     >

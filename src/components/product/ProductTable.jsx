@@ -4,27 +4,18 @@ import category from "../../../public/data/category.json";
 import { useEditButton } from "../../hooks/useButton";
 import { useProducts } from "../../context/ProductsContext";
 import useSkeleton from "../../hooks/useSkeleton";
-import { useGetUser } from "../../context/GetUserContext";
-import { useState, useEffect } from "react";
+import useUserId from "../../hooks/useUserId";
 
 const ProductTable = ({}) => {
   const { products, removeProduct, updateProduct } = useProducts();
   const [editButtonShow, handleEditButton] = useEditButton();
   const [isSkeleton, handleImageLoaded] = useSkeleton();
+  const [userId] = useUserId();
   const menu_category = category.menu_category;
-
-  const { userData } = useGetUser();
-  const [userId, setUserId] = useState(null);
-
-  useEffect(() => {
-    if (userData && userData.id) {
-      setUserId(userData.id);
-    }
-  }, [userData]);
 
   const renderProducts = products.map((item) =>
     item.userId === userId ? (
-      <div className="card border-0" key={item.img}>
+      <div className="card border-0" key={item.id}>
         <div className="card-body">
           <div className="row">
             <div className="col-md-2 rounded-circle">
@@ -45,15 +36,16 @@ const ProductTable = ({}) => {
             <div className="col-md-2 mt-2">{item.qty}</div>
             <div className="col-md-2 mt-2">
               <div className="d-flex gap-3 mt-1">
-                <FaEdit onClick={() => handleEditButton(item.img)} />
-                <FaTrash onClick={() => removeProduct(item.img)} />
+                <FaEdit onClick={() => handleEditButton(item.id)} />
+                <FaTrash onClick={() => removeProduct(item.id, item.img)} />
               </div>
             </div>
-            {editButtonShow.status && editButtonShow.img === item.img && (
+            {editButtonShow.status && editButtonShow.id === item.id && (
               <ProductsForm
                 updateProduct={updateProduct}
                 menu_category={menu_category}
                 data_value={{
+                  id: item.id,
                   name: item.name,
                   category: item.category,
                   price: item.price,
