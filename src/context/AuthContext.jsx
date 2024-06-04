@@ -31,6 +31,7 @@ export const AuthProvider = ({ children }) => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     const data = {
       fullname: e.target.fullname.value,
@@ -47,6 +48,9 @@ export const AuthProvider = ({ children }) => {
         data.password
       );
 
+      setLoading(false);
+      Swal.fire("Success!", "You have registered successfully.", "success");
+
       const userId = userCredential.user.uid;
 
       await setDoc(doc(db, "users", userId), {
@@ -55,23 +59,15 @@ export const AuthProvider = ({ children }) => {
         whatsapp: data.whatsapp,
         email: data.email,
       });
-
-      Swal.fire(
-        "Success!",
-        "You have registered successfully.",
-        "success"
-      ).then((result) => {
-        if (result.isConfirmed || result.isDismissed) {
-          setIsRegistered(true);
-        }
-      });
+      setIsRegistered(true);
     } catch (error) {
-      console.log(error);
+      setLoading(false);
       setIsInvalid(true);
     }
   };
 
   const handleLogin = async (e) => {
+    setLoading(true);
     e.preventDefault();
     const data = {
       email: e.target.email.value,
@@ -79,6 +75,7 @@ export const AuthProvider = ({ children }) => {
     };
     try {
       await signInWithEmailAndPassword(auth, data.email, data.password);
+      setLoading(false);
       Swal.fire("Success!", "You have logged in successfully.", "success").then(
         (result) => {
           if (result.isConfirmed || result.isDismissed) {
