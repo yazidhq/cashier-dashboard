@@ -4,8 +4,11 @@ import { FcGoogle } from "react-icons/fc";
 import Swal from "sweetalert2";
 import { FaGithub, FaFacebook, FaConciergeBell } from "react-icons/fa";
 import { useEffect } from "react";
+import { useAuth } from "../../context/AuthContext";
 
-const Auth = ({ handleLogin, handleRegister, isInvalid, handleInvalid }) => {
+const Auth = ({ handleLogin, handleRegister }) => {
+  const { isInvalid, handleInvalid } = useAuth();
+
   useEffect(() => {
     if (isInvalid) {
       if (handleRegister) {

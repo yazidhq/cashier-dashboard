@@ -3,20 +3,13 @@ import { useAuth } from "../../context/AuthContext";
 import Auth from "../../components/auth/Auth";
 
 const LoginPage = () => {
-  const { currentUser, handleLogin, isLoggedIn, isInvalid, handleInvalid } =
-    useAuth();
+  const { currentUser, isLoggedIn, handleLogin } = useAuth();
 
   if (currentUser || isLoggedIn) {
     return <Navigate to="/" />;
   }
 
-  return (
-    <Auth
-      handleLogin={handleLogin}
-      isInvalid={isInvalid}
-      handleInvalid={handleInvalid}
-    />
-  );
+  return <Auth handleLogin={handleLogin} />;
 };
 
 export default LoginPage;

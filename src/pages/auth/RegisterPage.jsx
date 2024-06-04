@@ -3,25 +3,13 @@ import { useAuth } from "../../context/AuthContext";
 import Auth from "../../components/auth/Auth";
 
 const RegisterPage = () => {
-  const {
-    currentUser,
-    handleRegister,
-    isRegistered,
-    isInvalid,
-    handleInvalid,
-  } = useAuth();
+  const { currentUser, isRegistered, handleRegister } = useAuth();
 
   if (currentUser || isRegistered) {
     return <Navigate to="/" />;
   }
 
-  return (
-    <Auth
-      handleRegister={handleRegister}
-      isInvalid={isInvalid}
-      handleInvalid={handleInvalid}
-    />
-  );
+  return <Auth handleRegister={handleRegister} />;
 };
 
 export default RegisterPage;

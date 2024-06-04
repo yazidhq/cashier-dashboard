@@ -26,17 +26,7 @@ export const AuthProvider = ({ children }) => {
       setCurrentUser(user);
       setLoading(false);
     });
-
-    const handleBeforeUnload = async () => {
-      await signOut(auth);
-    };
-
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    return () => {
-      unsubscribe();
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
+    return unsubscribe;
   }, []);
 
   const handleRegister = async (e) => {
