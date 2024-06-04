@@ -1,18 +1,9 @@
-import { useEffect, useState } from "react";
-import { useGetUser } from "../../context/GetUserContext";
 import useSkeleton from "../../hooks/useSkeleton";
+import useUserId from "../../hooks/useUserId";
 
 const ProductCard = ({ item, handleAddOrder }) => {
   const [isSkeleton, handleImageLoaded] = useSkeleton();
-
-  const { userData } = useGetUser();
-  const [userId, setUserId] = useState(null);
-
-  useEffect(() => {
-    if (userData && userData.id) {
-      setUserId(userData.id);
-    }
-  }, [userData]);
+  const [userId] = useUserId();
 
   const handleClick = () => {
     handleAddOrder(item.img, item.name, item.category, item.price);

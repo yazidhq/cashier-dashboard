@@ -1,19 +1,10 @@
 import { FaFileAlt, FaEye } from "react-icons/fa";
 import { useReports } from "../../context/ReportsContext";
-import { useGetUser } from "../../context/GetUserContext";
-import { useEffect, useState } from "react";
+import useUserId from "../../hooks/useUserId";
 
 const ReportTable = ({}) => {
   const { filteredData, handleDetails, details } = useReports();
-
-  const { userData } = useGetUser();
-  const [userId, setUserId] = useState(null);
-
-  useEffect(() => {
-    if (userData && userData.id) {
-      setUserId(userData.id);
-    }
-  }, [userData]);
+  const [userId] = useUserId();
 
   const renderDate = (date) => {
     return (
