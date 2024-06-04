@@ -18,7 +18,7 @@ const Products = ({}) => {
   });
 
   return (
-    <div style={{ paddingLeft: "2.5rem", minWidth: "730px" }}>
+    <div style={{ paddingLeft: "2.5rem" }}>
       <div className="flex-grow-1 px-5 pt-4 bg-light pb-1">
         <Category handleCategory={handleCategory} />
         <div className="mb-5">
