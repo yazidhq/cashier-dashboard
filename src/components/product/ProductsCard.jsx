@@ -18,11 +18,7 @@ const Products = ({}) => {
   });
 
   return (
-<<<<<<< HEAD
     <div style={{ paddingLeft: "2.5rem" }}>
-=======
-    <div style={{ paddingLeft: "2.5rem", minWidth: "730px" }}>
->>>>>>> 23f5d6d7dd8b1b87fa927dfd5933f44ae9ec20a0
       <div className="flex-grow-1 px-5 pt-4 bg-light pb-1">
         <Category handleCategory={handleCategory} />
         <div className="mb-5">
