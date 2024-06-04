@@ -35,8 +35,8 @@ export const ProductsProvider = ({ children }) => {
         }));
         setProducts(fetchedProducts);
       },
-      (error) => {
-        console.error("Error in snapshot listener:", error);
+      () => {
+        console.log("Youre not logged in yet");
       }
     );
     return () => shapShot();
