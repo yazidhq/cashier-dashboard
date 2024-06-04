@@ -1,25 +1,48 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import useSuccessPayment from "../hooks/useSuccessPayment";
-import { useGetUser } from "./GetUserContext";
 import useUserId from "../hooks/useUserId";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  query,
+} from "firebase/firestore";
+import { db } from "../firebase-config";
+import useLoading from "../hooks/useLoading";
+import Swal from "sweetalert2";
+import { useOrder } from "./OrderContext";
 
 const ReportsContext = createContext();
 
 export const useReports = () => useContext(ReportsContext);
 
 export const ReportsProvider = ({ children }) => {
-  const report = JSON.parse(localStorage.getItem("report")) || [];
-  const [reportOrder, setReportOrder] = useState(report);
-
+  const [reportOrder, setReportOrder] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [details, setDetails] = useState({ status: false, date: "" });
-
-  const [successPayment, setSuccessPayment] = useSuccessPayment();
+  const { successPayment, setSuccessPayment, isLoading, setIsLoading } =
+    useOrder();
   const [userId] = useUserId();
 
   useEffect(() => {
-    localStorage.setItem("report", JSON.stringify(reportOrder));
-  }, [reportOrder]);
+    const q = query(collection(db, "reports"));
+    const snapShot = onSnapshot(
+      q,
+      (querySnapshot) => {
+        const fetchedReports = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setReportOrder(fetchedReports);
+      },
+      () => {
+        console.log("Youre not logged in yet");
+      }
+    );
+    return () => snapShot();
+  }, []);
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
@@ -37,16 +60,17 @@ export const ReportsProvider = ({ children }) => {
     setDetails({ status: !details.status, date: date });
   };
 
-  const handleSaveReport = (
+  const handleSaveReport = async (
     totalPrice,
     itemsName,
     itemsQty,
     changeOrder,
     changeBack
   ) => {
-    setReportOrder([
-      ...reportOrder,
-      {
+    setSuccessPayment(false);
+    setIsLoading(true);
+    try {
+      await addDoc(collection(db, "reports"), {
         userId: userId,
         totalPrice,
         itemsName,
@@ -54,15 +78,45 @@ export const ReportsProvider = ({ children }) => {
         changeOrder,
         changeBack,
         date: new Date().toLocaleString() + "",
-      },
-    ]);
-    setSuccessPayment(true);
+      });
+      setSuccessPayment(true);
+      setIsLoading(false);
+    } catch {
+      setSuccessPayment(false);
+      Swal.fire("Failed!", "The receipt has been failed created");
+    }
+  };
+
+  const removeReport = async (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      setIsLoading(true);
+      if (result.isConfirmed) {
+        try {
+          await deleteDoc(doc(db, "reports", id));
+          setIsLoading(false);
+          Swal.fire("Deleted!", "Your report has been deleted.", "success");
+        } catch (err) {
+          Swal.fire("Failed!", "Your report has been delete failed.", "error");
+        }
+      } else {
+        setIsLoading(false);
+      }
+    });
   };
 
   return (
     <ReportsContext.Provider
       value={{
         handleSaveReport,
+        removeReport,
         reportOrder,
         searchTerm,
         handleSearch,
@@ -70,6 +124,7 @@ export const ReportsProvider = ({ children }) => {
         handleDetails,
         details,
         successPayment,
+        isLoading,
       }}
     >
       {children}

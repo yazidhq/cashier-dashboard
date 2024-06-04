@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useProducts } from "./ProductsContext";
 import useSuccessPayment from "../hooks/useSuccessPayment";
+import useLoading from "../hooks/useLoading";
 
 const OrderContext = createContext();
 
@@ -8,8 +9,8 @@ export const useOrder = () => useContext(OrderContext);
 
 export const OrderProvider = ({ children }) => {
   const { products } = useProducts();
-  const [, setSuccessPayment] = useSuccessPayment();
-
+  const [successPayment, setSuccessPayment] = useSuccessPayment();
+  const [isLoading, setIsLoading] = useLoading();
   const order = JSON.parse(localStorage.getItem("order")) || [];
   const [orderMenu, setOrderMenu] = useState(order);
   const [orderButton, setOrderButton] = useState(false);
@@ -57,11 +58,17 @@ export const OrderProvider = ({ children }) => {
   const cancelOrder = () => {
     localStorage.removeItem("order");
     setOrderMenu([]);
+    setOrderButton(false);
+    setChangeOrder();
+    setSuccessPayment(false);
   };
 
   const cancelSingleOrder = (img) => {
     const updatedOrderMenu = orderMenu.filter((item) => item.img !== img);
     setOrderMenu(updatedOrderMenu);
+    setOrderButton(false);
+    setChangeOrder();
+    setSuccessPayment(false);
     localStorage.setItem("order", JSON.stringify(updatedOrderMenu));
   };
 
@@ -101,6 +108,10 @@ export const OrderProvider = ({ children }) => {
         handleChange,
         changeOrder,
         handleDoneButtonPayment,
+        successPayment,
+        setSuccessPayment,
+        isLoading,
+        setIsLoading,
       }}
     >
       {children}

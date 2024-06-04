@@ -1,12 +1,13 @@
 import { useOrder } from "../../context/OrderContext";
 import { useReports } from "../../context/ReportsContext";
 import Button from "../Button";
+import LoadingSpinner from "../LoadingSpinner";
 import OrderInputNominal from "./OrderInputNominal";
 import OrderTotal from "./OrderTotal";
 import { FaCheckCircle } from "react-icons/fa";
 
 const OrderModal = ({ changeOrder, orderItemsName, orderItemsQty }) => {
-  const { handleSaveReport, successPayment } = useReports();
+  const { handleSaveReport, successPayment, isLoading } = useReports();
 
   const {
     totalPrice,
@@ -41,67 +42,76 @@ const OrderModal = ({ changeOrder, orderItemsName, orderItemsQty }) => {
       <p className="text-center fw-bold">Select the amount first</p>
     );
 
-  const nominalInput = successPayment ? (
-    <div>
-      <div className="d-flex flex-column justify-content-center align-items-center mb-4">
-        <FaCheckCircle
-          className="text-success mb-3"
-          style={{ fontSize: "150px" }}
-        />
-        <p className="text-success fs-3">Payment Successful!</p>
-        <div className="input-group px-4 mb-3">
-          <input
-            type="text"
-            className="form-control border-success rounded-0"
-            placeholder="send receipt to email"
-          />
-          <Button
-            text={"send"}
-            color={"outline-success"}
-            rounded={"rounded-0"}
-          />
-        </div>
-        <Button
-          text={"Print Receipt"}
-          color={"outline-success"}
-          rounded={"rounded-0"}
-        />
-      </div>
-      <div className="px-4 pb-4 pt-4 border-top border-secondary">
-        <Button
-          text="Done"
-          color={"danger"}
-          handleClick={handleDoneButtonPayment}
-        />
-      </div>
+  const nominalInput = isLoading ? (
+    <div className="d-flex align-item-center justify-content-center py-5">
+      <LoadingSpinner />
     </div>
   ) : (
-    <div>
-      <div className="px-4 mt-2">
-        <div className="row row-cols-3 px-2 pt-3 mb-3">
-          {nominals.map((nominal) => (
-            <OrderInputNominal
-              key={nominal}
-              changeOrder={changeOrder}
-              nominal={nominal}
-              handleChange={handleChange}
+    <>
+      {successPayment ? (
+        <div>
+          <div className="d-flex flex-column justify-content-center align-items-center mb-4">
+            <FaCheckCircle
+              className="text-success mb-3 mt-4"
+              style={{ fontSize: "150px" }}
             />
-          ))}
-          <input
-            type="number"
-            className="form-control rounded-0"
-            placeholder="Nominal amount (ex: 500000)"
-            onChange={(e) => handleChange(e.target.value)}
-          />
+            <p className="text-success fs-3">Payment Successful!</p>
+            <div className="input-group px-4 mb-3">
+              <input
+                type="text"
+                className="form-control border-success rounded-0"
+                placeholder="send receipt to email"
+              />
+              <Button
+                text={"send"}
+                color={"outline-success"}
+                rounded={"rounded-0"}
+              />
+            </div>
+            <Button
+              text={"Print Receipt"}
+              color={"outline-success"}
+              rounded={"rounded-0"}
+            />
+          </div>
+          <div className="px-4 pb-4 pt-4 border-top border-secondary">
+            <Button
+              text="Done"
+              color={"danger"}
+              handleClick={handleDoneButtonPayment}
+            />
+          </div>
         </div>
-        <OrderTotal
-          price={totalPrice}
-          tax={taxPrice}
-          changeOrder={changeOrder}
-        />
-      </div>
-      <div className="px-4 pb-4">{payNow}</div>
-    </div>
+      ) : (
+        <div>
+          <div className="px-4 mt-2">
+            <div className="row row-cols-3 px-2 pt-3 mb-3">
+              {nominals.map((nominal) => (
+                <OrderInputNominal
+                  key={nominal}
+                  changeOrder={changeOrder}
+                  nominal={nominal}
+                  handleChange={handleChange}
+                />
+              ))}
+              <input
+                type="number"
+                className="form-control rounded-0"
+                placeholder="Nominal amount (ex: 500000)"
+                onChange={(e) => handleChange(e.target.value)}
+              />
+            </div>
+            <OrderTotal
+              price={totalPrice}
+              tax={taxPrice}
+              changeOrder={changeOrder}
+            />
+          </div>
+          <div className="px-4 pb-4">{payNow}</div>
+        </div>
+      )}
+      ;
+    </>
   );
 
   return (

@@ -1,9 +1,11 @@
-import { FaFileAlt, FaEye } from "react-icons/fa";
+import { FaFileAlt, FaEye, FaTrash } from "react-icons/fa";
 import { useReports } from "../../context/ReportsContext";
 import useUserId from "../../hooks/useUserId";
+import LoadingSpinner from "../LoadingSpinner";
 
 const ReportTable = ({}) => {
-  const { filteredData, handleDetails, details } = useReports();
+  const { filteredData, handleDetails, details, removeReport, isLoading } =
+    useReports();
   const [userId] = useUserId();
 
   const renderDate = (date) => {
@@ -47,12 +49,13 @@ const ReportTable = ({}) => {
           <div className="card-body">
             <div className="row">
               <div className="col-md-2">{renderDate(item.date)}</div>
-              <div className="col-md-3">{renderProducts(item)}</div>
+              <div className="col-md-2">{renderProducts(item)}</div>
               <div className="col-md-2">{renderCurrency(item.totalPrice)}</div>
               <div className="col-md-2">{renderCurrency(item.changeOrder)}</div>
               <div className="col-md-2">{renderCurrency(item.changeBack)}</div>
-              <div className="col-md-1 d-flex gap-3">
+              <div className="col-md-2 d-flex gap-3">
                 <FaEye onClick={() => handleDetails(item.date)} />
+                <FaTrash onClick={() => removeReport(item.id)} />
                 <FaFileAlt />
               </div>
             </div>
@@ -62,17 +65,25 @@ const ReportTable = ({}) => {
     </div>
   ));
 
+  if (isLoading) {
+    return (
+      <div className="position-absolute top-50 start-50 translate-middle">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
   return (
     <div className="d-flex flex-column gap-2">
       <div className="card bg-light border-bottom border-white">
         <div className="card-body">
           <div className="row fw-bold">
             <div className="col-md-2">Date Order</div>
-            <div className="col-md-3">Products</div>
+            <div className="col-md-2">Products</div>
             <div className="col-md-2">Total Price</div>
             <div className="col-md-2">Amount Paid</div>
             <div className="col-md-2">Change Back</div>
-            <div className="col-md-1">Receipt</div>
+            <div className="col-md-2">Actions</div>
           </div>
         </div>
       </div>
