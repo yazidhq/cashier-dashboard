@@ -10,7 +10,7 @@ const Button = ({
     <div className={grid}>
       <button
         type={type}
-        className={`btn btn-sm btn-${color} ${rounded}`}
+        className={`btn btn-${color} ${rounded}`}
         onClick={handleClick}
       >
         {text}

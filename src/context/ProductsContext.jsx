@@ -14,6 +14,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import useUserId from "../hooks/useUserId";
+import useSearch from "../hooks/useSearch";
 
 const ProductsContext = createContext();
 
@@ -22,6 +23,7 @@ export const useProducts = () => useContext(ProductsContext);
 export const ProductsProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useLoading();
+  const [searchTerm, handleSearch] = useSearch();
   const [userId] = useUserId();
 
   useEffect(() => {
@@ -155,6 +157,10 @@ export const ProductsProvider = ({ children }) => {
     }
   };
 
+  const filteredData = products.filter((item) =>
+    item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <ProductsContext.Provider
       value={{
@@ -163,6 +169,9 @@ export const ProductsProvider = ({ children }) => {
         addProduct,
         removeProduct,
         updateProduct,
+        searchTerm,
+        handleSearch,
+        filteredData,
       }}
     >
       {children}

@@ -1,5 +1,4 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import useSuccessPayment from "../hooks/useSuccessPayment";
 import useUserId from "../hooks/useUserId";
 import {
   addDoc,
@@ -10,17 +9,17 @@ import {
   query,
 } from "firebase/firestore";
 import { db } from "../firebase-config";
-import useLoading from "../hooks/useLoading";
 import Swal from "sweetalert2";
 import { useOrder } from "./OrderContext";
+import useSearch from "../hooks/useSearch";
 
 const ReportsContext = createContext();
 
 export const useReports = () => useContext(ReportsContext);
 
 export const ReportsProvider = ({ children }) => {
+  const [searchTerm, handleSearch] = useSearch();
   const [reportOrder, setReportOrder] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
   const [details, setDetails] = useState({ status: false, date: "" });
   const { successPayment, setSuccessPayment, isLoading, setIsLoading } =
     useOrder();
@@ -43,10 +42,6 @@ export const ReportsProvider = ({ children }) => {
     );
     return () => snapShot();
   }, []);
-
-  const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
-  };
 
   const filteredData = reportOrder
     .filter((item) =>

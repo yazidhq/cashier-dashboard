@@ -1,6 +1,7 @@
 import category from "../../../public/data/category.json";
 import CategoryCard from "./CategoryCard";
 import TitleMenu from "../TitleMenu";
+import ProductsSearch from "../product/ProductsSearch";
 
 const Category = ({ handleCategory }) => {
   const menu_category = category.menu_category;
@@ -15,7 +16,14 @@ const Category = ({ handleCategory }) => {
 
   return (
     <div className="mb-5">
-      <TitleMenu firstWord={"Menu"} lastWord={"Category"} />
+      <div className="row">
+        <div className="col-lg-6">
+          <TitleMenu firstWord={"Menu"} lastWord={"Category"} />
+        </div>
+        <div className="col-lg-6 d-flex justify-content-end">
+          <ProductsSearch classes={"mt-3 mb-5"} />
+        </div>
+      </div>
       <div className="row row-cols-1 row-cols-md-4 g-3">{categories}</div>
     </div>
   );

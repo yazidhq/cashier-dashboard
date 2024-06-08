@@ -6,6 +6,7 @@ import ProductsForm from "./ProductsForm";
 import LoadingSpinner from "../LoadingSpinner";
 import { useAddButton } from "../../hooks/useButton";
 import { useProducts } from "../../context/ProductsContext";
+import ProductsSearch from "./ProductsSearch";
 
 const ProductsTable = ({}) => {
   const { isLoading, addProduct } = useProducts();
@@ -21,13 +22,18 @@ const ProductsTable = ({}) => {
         <div className="mb-5">
           <div className="d-flex justify-content-between">
             <TitleMenu firstWord={"Product"} lastWord={"Managements"} />
-            <div className="mt-3">
-              <Button
-                grid=""
-                text={"Add new product"}
-                color={"danger"}
-                handleClick={handleAddButton}
-              />
+            <div className="d-flex gap-3">
+              <div className="mt-3">
+                <ProductsSearch />
+              </div>
+              <div className="mt-3">
+                <Button
+                  grid=""
+                  text={"Add new product"}
+                  color={"danger"}
+                  handleClick={handleAddButton}
+                />
+              </div>
             </div>
           </div>
 

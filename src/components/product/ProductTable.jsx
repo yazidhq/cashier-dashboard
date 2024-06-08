@@ -7,13 +7,13 @@ import useSkeleton from "../../hooks/useSkeleton";
 import useUserId from "../../hooks/useUserId";
 
 const ProductTable = ({}) => {
-  const { products, removeProduct, updateProduct } = useProducts();
+  const { filteredData, removeProduct, updateProduct } = useProducts();
   const [editButtonShow, handleEditButton] = useEditButton();
   const [isSkeleton, handleImageLoaded] = useSkeleton();
   const [userId] = useUserId();
   const menu_category = category.menu_category;
 
-  const renderProducts = products.map((item) =>
+  const renderProducts = filteredData.map((item) =>
     item.userId === userId ? (
       <div className="card border-0" key={item.id}>
         <div className="card-body">

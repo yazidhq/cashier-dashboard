@@ -7,11 +7,11 @@ import useCategory from "../../hooks/useCategory";
 import { useOrder } from "../../context/OrderContext";
 
 const Products = ({}) => {
-  const { products } = useProducts();
+  const { filteredData } = useProducts();
   const [showCategory, handleCategory] = useCategory();
   const { addOrder } = useOrder();
 
-  const renderProducts = products.map((item) => {
+  const renderProducts = filteredData.map((item) => {
     return showCategory === "all" || item.category == showCategory ? (
       <ProductCard key={item.img} item={item} handleAddOrder={addOrder} />
     ) : null;
