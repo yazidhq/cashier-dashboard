@@ -55,7 +55,15 @@ export const ProfileProvider = ({ children }) => {
       await updateDoc(userRef, data);
       setEditButton({ status: false });
       setIsLoading(false);
-      Swal.fire("Success!", "Your profile has been updated!", "success");
+      Swal.fire("Success!", "Your profile has been updated!", "success").then(
+        async (result) => {
+          if (result.isConfirmed) {
+            window.location.href = "/profile";
+          } else {
+            window.location.href = "/profile";
+          }
+        }
+      );
     } catch (error) {
       setIsLoading(false);
       Swal.fire("Failed!", "Please check your password verification", "error");
