@@ -67,24 +67,24 @@ export const AuthProvider = ({ children }) => {
   };
 
   const handleLogin = async (e) => {
-    setLoading(true);
+    setIsLoggedIn(false);
     e.preventDefault();
     const data = {
       email: e.target.email.value,
       password: e.target.password.value,
     };
     try {
-      await signInWithEmailAndPassword(auth, data.email, data.password);
-      setLoading(false);
-      Swal.fire("Success!", "You have logged in successfully.", "success").then(
-        (result) => {
-          if (result.isConfirmed || result.isDismissed) {
-            setIsLoggedIn(true);
-          }
+      await Swal.fire(
+        "Success!",
+        "You have logged in successfully.",
+        "success"
+      ).then(async (result) => {
+        if (result.isConfirmed || result.isDismissed) {
+          await signInWithEmailAndPassword(auth, data.email, data.password);
+          setIsLoggedIn(true);
         }
-      );
+      });
     } catch (error) {
-      setLoading(false);
       setIsInvalid(true);
     }
   };
