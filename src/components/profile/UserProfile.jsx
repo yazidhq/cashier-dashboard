@@ -10,7 +10,10 @@ const UserProfile = () => {
   return (
     <div className="w-100" style={{ paddingLeft: "3rem" }}>
       {getUser ? (
-        <div className="flex-grow-1 px-5 pt-4 bg-light pb-1">
+        <div
+          className="flex-grow-1 px-5 pt-4 bg-light"
+          style={{ minHeight: "calc(100vh)" }}
+        >
           <div className="mb-5 d-flex justify-content-between">
             <TitleMenu
               firstWord={getUser.username + "'s"}

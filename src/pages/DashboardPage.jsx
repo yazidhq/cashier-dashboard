@@ -5,8 +5,12 @@ import Section from "../components/layouts/Section";
 const DashboardPage = () => {
   return (
     <Section>
-      <ProductsCard />
-      <Orders />
+      <div style={{ width: "70%" }}>
+        <ProductsCard />
+      </div>
+      <div style={{ width: "30%" }}>
+        <Orders />
+      </div>
     </Section>
   );
 };
