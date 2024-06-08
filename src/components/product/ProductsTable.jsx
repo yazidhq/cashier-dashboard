@@ -15,7 +15,7 @@ const ProductsTable = ({}) => {
   return (
     <div className="w-100" style={{ paddingLeft: "3rem" }}>
       <div
-        className="flex-grow-1 px-5 pt-4 bg-light"
+        className="flex-grow-1 px-5 pt-4 bg-light pb-1"
         style={{ minHeight: "calc(100vh)" }}
       >
         <div className="mb-5">
@@ -40,7 +40,9 @@ const ProductsTable = ({}) => {
 
           {isLoading ? (
             <div className="mt-3">
-              <LoadingSpinner />
+              <div className="d-flex align-item-center justify-content-center">
+                <LoadingSpinner />
+              </div>
             </div>
           ) : (
             <ProductTable />

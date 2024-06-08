@@ -6,7 +6,7 @@ const ReportsTable = ({}) => {
   return (
     <div className="w-100" style={{ paddingLeft: "3rem" }}>
       <div
-        className="flex-grow-1 px-5 pt-4 bg-light"
+        className="flex-grow-1 px-5 pt-4 bg-light pb-1"
         style={{ minHeight: "calc(100vh)" }}
       >
         <div className="mb-5">
