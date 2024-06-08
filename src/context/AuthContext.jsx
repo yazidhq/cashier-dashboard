@@ -84,6 +84,7 @@ export const AuthProvider = ({ children }) => {
         }
       );
     } catch (error) {
+      setLoading(false);
       setIsInvalid(true);
     }
   };
