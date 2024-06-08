@@ -13,7 +13,7 @@ const useUserId = () => {
     }
   }, [userData]);
 
-  return [userId, getUser];
+  return [userId, getUser, setUser];
 };
 
 export default useUserId;

@@ -63,13 +63,14 @@ const EditForm = () => {
         </div>
       </div>
       <br />
+      <div className="border border-top border-danger my-3"></div>
       <div className="row">
         <div className="col-12">
           <label htmlFor="password" className="form-label">
-            Password
+            Password Verification
           </label>
           <input
-            type="text"
+            type="password"
             id="password"
             className="form-control"
             name="password"
