@@ -6,7 +6,12 @@ import OrderInputNominal from "./OrderInputNominal";
 import OrderTotal from "./OrderTotal";
 import { FaCheckCircle } from "react-icons/fa";
 
-const OrderModal = ({ changeOrder, orderItemsName, orderItemsQty }) => {
+const OrderModal = ({
+  changeOrder,
+  orderItemsId,
+  orderItemsName,
+  orderItemsQty,
+}) => {
   const { handleSaveReport, successPayment, isLoading } = useReports();
 
   const {
@@ -29,6 +34,7 @@ const OrderModal = ({ changeOrder, orderItemsName, orderItemsQty }) => {
         handleClick={() =>
           handleSaveReport(
             totalPrice,
+            orderItemsId,
             orderItemsName,
             orderItemsQty,
             changeOrder,

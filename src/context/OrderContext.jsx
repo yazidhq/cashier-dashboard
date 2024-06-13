@@ -26,18 +26,19 @@ export const OrderProvider = ({ children }) => {
     localStorage.setItem("order", JSON.stringify(orderMenu));
   }, [orderMenu]);
 
-  const addOrder = (img, name, category, price) => {
+  const addOrder = (id, img, name, category, price) => {
     const data = {
+      id,
       img,
       name,
       category,
       price,
       qty: 1,
     };
-    if (orderMenu.find((item) => item.img === data.img)) {
+    if (orderMenu.find((item) => item.id === data.id)) {
       setOrderMenu(
         orderMenu.map((item) =>
-          item.img === data.img ? { ...item, qty: item.qty + 1 } : item
+          item.id === data.id ? { ...item, qty: item.qty + 1 } : item
         )
       );
     } else {

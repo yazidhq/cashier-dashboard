@@ -39,6 +39,7 @@ const Orders = ({}) => {
           changeOrder={changeOrder}
           orderItemsName={orderMenu.map((item) => item.name)}
           orderItemsQty={orderMenu.map((item) => item.qty)}
+          orderItemsId={orderMenu.map((item) => item.id)}
         />
       )}
 

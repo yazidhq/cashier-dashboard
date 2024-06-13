@@ -7,11 +7,13 @@ import {
   doc,
   onSnapshot,
   query,
+  updateDoc,
 } from "firebase/firestore";
 import { db } from "../firebase-config";
 import Swal from "sweetalert2";
 import { useOrder } from "./OrderContext";
 import useSearch from "../hooks/useSearch";
+import { useProducts } from "./ProductsContext";
 
 const ReportsContext = createContext();
 
@@ -23,6 +25,7 @@ export const ReportsProvider = ({ children }) => {
   const [details, setDetails] = useState({ status: false, date: "" });
   const { successPayment, setSuccessPayment, isLoading, setIsLoading } =
     useOrder();
+  const { products } = useProducts();
   const [userId] = useUserId();
 
   useEffect(() => {
@@ -57,6 +60,7 @@ export const ReportsProvider = ({ children }) => {
 
   const handleSaveReport = async (
     totalPrice,
+    itemsId,
     itemsName,
     itemsQty,
     changeOrder,
@@ -74,10 +78,28 @@ export const ReportsProvider = ({ children }) => {
         changeBack,
         date: new Date().toLocaleString() + "",
       });
+
+      const productOrder = products.filter((item) => itemsId.includes(item.id));
+      const prdctqty = productOrder.map((product) => product.qty);
+      const orderqty = itemsQty;
+
+      if (prdctqty.length !== orderqty.length) {
+        console.error("Arrays must be of the same length");
+      } else {
+        const results = prdctqty.map((qty, index) =>
+          (qty - orderqty[index]).toString()
+        );
+        for (let i = 0; i < itemsId.length; i++) {
+          const productDocRef = doc(db, "products", itemsId[i]);
+          await updateDoc(productDocRef, { qty: results[i] });
+        }
+      }
+
       setSuccessPayment(true);
       setIsLoading(false);
-    } catch {
+    } catch (err) {
       setSuccessPayment(false);
+      setIsLoading(false);
       Swal.fire("Failed!", "The receipt has been failed created");
     }
   };

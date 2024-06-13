@@ -74,13 +74,13 @@ export const AuthProvider = ({ children }) => {
       password: e.target.password.value,
     };
     try {
+      await signInWithEmailAndPassword(auth, data.email, data.password);
       await Swal.fire(
         "Success!",
         "You have logged in successfully.",
         "success"
       ).then(async (result) => {
         if (result.isConfirmed || result.isDismissed) {
-          await signInWithEmailAndPassword(auth, data.email, data.password);
           setIsLoggedIn(true);
         }
       });

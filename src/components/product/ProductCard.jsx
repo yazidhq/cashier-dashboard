@@ -6,7 +6,7 @@ const ProductCard = ({ item, handleAddOrder }) => {
   const [userId] = useUserId();
 
   const handleClick = () => {
-    handleAddOrder(item.img, item.name, item.category, item.price);
+    handleAddOrder(item.id, item.img, item.name, item.category, item.price);
   };
 
   return (
