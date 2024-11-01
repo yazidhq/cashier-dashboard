@@ -72,3 +72,47 @@
     opacity: 0.5;
   }
 }
+
+.pagination-container {
+  align-items: left;
+  display: flex;
+  flex-direction: flex-row;
+  justify-content: center;
+  list-style: none;
+  gap: 16px;
+  padding: 0;
+}
+
+.pagination-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: #dc3545;
+}
+
+.pagination-active > a {
+  font-weight: 1000;
+}
+
+.pagination-next-prev {
+  display: flex;
+  padding: 0.75rem;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  cursor: pointer;
+}
+
+.pagination-break {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  cursor: pointer;
+}

@@ -2,10 +2,15 @@ import { FaFileAlt, FaEye, FaTrash } from "react-icons/fa";
 import { useReports } from "../../context/ReportsContext";
 import useUserId from "../../hooks/useUserId";
 import LoadingSpinner from "../LoadingSpinner";
+import { usePaginated } from "../../hooks/usePaginated";
+import Pagination from "../Pagination";
 
 const ReportTable = ({}) => {
   const { filteredData, handleDetails, details, removeReport, isLoading } =
     useReports();
+  const [paginatedItems, handlePageChange, itemsPerPage] = usePaginated({
+    filteredData,
+  });
   const [userId] = useUserId();
 
   const renderDate = (date) => {
@@ -42,7 +47,7 @@ const ReportTable = ({}) => {
     return "Rp. " + amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   };
 
-  const dataReports = filteredData.map((item, index) => (
+  const dataReports = paginatedItems.map((item, index) => (
     <div key={index}>
       {item.userId === userId && (
         <div className="card border-0">
@@ -88,6 +93,11 @@ const ReportTable = ({}) => {
         </div>
       </div>
       {dataReports}
+      <Pagination
+        handlePageChange={handlePageChange}
+        filteredData={filteredData}
+        itemsPerPage={itemsPerPage}
+      />
     </div>
   );
 };

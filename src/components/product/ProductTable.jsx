@@ -5,15 +5,20 @@ import { useEditButton } from "../../hooks/useButton";
 import { useProducts } from "../../context/ProductsContext";
 import useSkeleton from "../../hooks/useSkeleton";
 import useUserId from "../../hooks/useUserId";
+import Pagination from "../Pagination";
+import { usePaginated } from "../../hooks/usePaginated";
 
 const ProductTable = ({}) => {
   const { filteredData, removeProduct, updateProduct } = useProducts();
+  const [paginatedItems, handlePageChange, itemsPerPage] = usePaginated({
+    filteredData,
+  });
   const [editButtonShow, handleEditButton] = useEditButton();
   const [isSkeleton, handleImageLoaded] = useSkeleton();
   const [userId] = useUserId();
   const menu_category = category.menu_category;
 
-  const renderProducts = filteredData.map((item) =>
+  const renderProducts = paginatedItems.map((item) =>
     item.userId === userId ? (
       <div className="card border-0" key={item.id}>
         <div className="card-body">
@@ -74,6 +79,11 @@ const ProductTable = ({}) => {
         </div>
       </div>
       {renderProducts}
+      <Pagination
+        handlePageChange={handlePageChange}
+        filteredData={filteredData}
+        itemsPerPage={itemsPerPage}
+      />
     </div>
   );
 };
