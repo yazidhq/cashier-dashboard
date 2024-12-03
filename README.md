@@ -24,7 +24,6 @@ Website Cashier is a simple web application that allows you to efficiently manag
 
    ```bash
    git clone https://github.com/yazidhq/cashier-dashboard
-   cd website-cashier
    ```
 
 2. Install dependencies:
