@@ -40,7 +40,9 @@ export const ReportsProvider = ({ children }) => {
         }));
         setReportOrder(fetchedReports);
       },
-      () => {}
+      (error) => {
+        console.log("Error fetching reports:", error);
+      }
     );
     return () => snapShot();
   }, [userId]);

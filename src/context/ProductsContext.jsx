@@ -40,8 +40,8 @@ export const ProductsProvider = ({ children }) => {
         setProducts(fetchedProducts);
         setIsLoading(false);
       },
-      () => {
-        console.log("Youre not logged in yet");
+      (error) => {
+        console.log("Error fetching products:", error);
         setIsLoading(false);
       }
     );
