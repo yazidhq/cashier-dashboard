@@ -3,7 +3,7 @@ import CategoryCard from "./CategoryCard";
 import TitleMenu from "../TitleMenu";
 import ProductsSearch from "../product/ProductsSearch";
 
-const Category = ({ handleCategory }) => {
+const Category = ({ handleCategory, showCategory }) => {
   const menu_category = category.menu_category;
 
   const categories = menu_category.map((item) => (
@@ -11,6 +11,7 @@ const Category = ({ handleCategory }) => {
       item={item}
       key={item}
       handleCategory={() => handleCategory(item)}
+      showCategory={showCategory}
     />
   ));
 
