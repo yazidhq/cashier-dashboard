@@ -4,6 +4,7 @@ import useUserId from "../../hooks/useUserId";
 import LoadingSpinner from "../LoadingSpinner";
 import { usePaginated } from "../../hooks/usePaginated";
 import Pagination from "../Pagination";
+import { Link } from "react-router-dom";
 
 const ReportTable = ({}) => {
   const { filteredData, handleDetails, details, removeReport, isLoading } =
@@ -92,7 +93,19 @@ const ReportTable = ({}) => {
           </div>
         </div>
       </div>
-      {dataReports}
+      {dataReports.length != 0 ? (
+        dataReports
+      ) : (
+        <div className="text-center mt-4">
+          <p className="text-muted">
+            Kickstart your order
+            <Link to={"/"} className="text-decoration-none">
+              <span className="fw-bold  text-danger"> transaction!</span>
+            </Link>
+          </p>
+        </div>
+      )}
+      <div className="border-3 border-bottom border-white mt-2"></div>
       <Pagination
         handlePageChange={handlePageChange}
         filteredData={filteredData}

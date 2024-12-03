@@ -78,7 +78,14 @@ const ProductTable = ({}) => {
           </div>
         </div>
       </div>
-      {renderProducts}
+      {renderProducts.length != 0 ? (
+        renderProducts
+      ) : (
+        <div className="text-center mt-4">
+          <p className="text-muted">No products yet!</p>
+        </div>
+      )}
+      <div className="border-3 border-bottom border-white mt-2"></div>
       <Pagination
         handlePageChange={handlePageChange}
         filteredData={filteredData}

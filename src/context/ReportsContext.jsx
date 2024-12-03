@@ -8,6 +8,7 @@ import {
   onSnapshot,
   query,
   updateDoc,
+  where,
 } from "firebase/firestore";
 import { db } from "../firebase-config";
 import Swal from "sweetalert2";
@@ -29,7 +30,7 @@ export const ReportsProvider = ({ children }) => {
   const [userId] = useUserId();
 
   useEffect(() => {
-    const q = query(collection(db, "reports"));
+    const q = query(collection(db, "reports"), where("userId", "==", userId));
     const snapShot = onSnapshot(
       q,
       (querySnapshot) => {
@@ -39,12 +40,10 @@ export const ReportsProvider = ({ children }) => {
         }));
         setReportOrder(fetchedReports);
       },
-      () => {
-        console.log("Youre not logged in yet");
-      }
+      () => {}
     );
     return () => snapShot();
-  }, []);
+  }, [userId]);
 
   const filteredData = reportOrder
     .filter((item) =>
