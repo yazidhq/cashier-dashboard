@@ -8,6 +8,7 @@ import { useOrder } from "../../context/OrderContext";
 import { collection, onSnapshot, query } from "firebase/firestore";
 import { useEffect } from "react";
 import { db } from "../../firebase-config";
+import LoadingSpinner from "../LoadingSpinner";
 
 const Products = ({}) => {
   const { setProducts, filteredData } = useProducts();
@@ -62,9 +63,16 @@ const Products = ({}) => {
               </p>
             </div>
           </div>
-          <div className="row row-cols-1 row-cols-md-3 g-4">
-            {renderProducts}
-          </div>
+
+          {renderProducts.length != 0 ? (
+            <div className="row row-cols-1 row-cols-md-3 g-4">
+              {renderProducts}
+            </div>
+          ) : (
+            <div className="text-center mt-5">
+              <LoadingSpinner />
+            </div>
+          )}
         </div>
       </div>
     </div>

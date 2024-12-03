@@ -55,14 +55,6 @@ const Sidebar = () => {
               <FaFileAlt />
             </Link>
           </li>
-          <li className="fs-2 mt-3 text-center">
-            <Link
-              to="/profile"
-              className={`text-decoration-none ${getLinkClass("/profile")}`}
-            >
-              <FaUserCircle />
-            </Link>
-          </li>
           <li className="fs-2 mt-3 text-center text-danger">
             <FaSignOutAlt onClick={handleLogout} />
           </li>
