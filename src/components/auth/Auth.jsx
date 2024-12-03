@@ -63,7 +63,13 @@ const Auth = ({ handleLogin, handleRegister }) => {
                     <label htmlFor="fullname" className="form-label">
                       Fullname
                     </label>
-                    <input type="text" className="form-control" id="fullname" />
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="fullname"
+                      name="fullname"
+                      autoComplete="fullname"
+                    />
                   </div>
                 </div>
                 <div className="row row-cols-1 row-cols-md-2 g-2">
@@ -76,6 +82,8 @@ const Auth = ({ handleLogin, handleRegister }) => {
                         type="text"
                         className="form-control"
                         id="username"
+                        name="username"
+                        autoComplete="username"
                       />
                     </div>
                   </div>
@@ -88,6 +96,8 @@ const Auth = ({ handleLogin, handleRegister }) => {
                         type="number"
                         className="form-control"
                         id="whatsapp"
+                        name="whatsapp"
+                        autoComplete="whatsapp"
                       />
                     </div>
                   </div>
@@ -96,7 +106,13 @@ const Auth = ({ handleLogin, handleRegister }) => {
                       <label htmlFor="email" className="form-label">
                         Email
                       </label>
-                      <input type="email" className="form-control" id="email" />
+                      <input
+                        type="email"
+                        className="form-control"
+                        id="email"
+                        name="email"
+                        autoComplete="email"
+                      />
                     </div>
                   </div>
                   <div className="col">
@@ -108,6 +124,8 @@ const Auth = ({ handleLogin, handleRegister }) => {
                         type="password"
                         className="form-control"
                         id="password"
+                        name="password"
+                        autoComplete="password"
                       />
                     </div>
                   </div>
@@ -119,7 +137,13 @@ const Auth = ({ handleLogin, handleRegister }) => {
                   <label htmlFor="email" className="form-label">
                     Email
                   </label>
-                  <input type="email" className="form-control" id="email" />
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="email"
+                    name="email"
+                    autoComplete="email"
+                  />
                 </div>
                 <div className="mb-3">
                   <label htmlFor="password" className="form-label">
@@ -129,6 +153,8 @@ const Auth = ({ handleLogin, handleRegister }) => {
                     type="password"
                     className="form-control"
                     id="password"
+                    name="password"
+                    autoComplete="password"
                   />
                 </div>
               </>

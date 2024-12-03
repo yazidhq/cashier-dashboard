@@ -23,6 +23,7 @@ const ProductsForm = ({
           className={`form-control ${updateProduct ? "" : "border-0"}`}
           placeholder="Product name"
           name="name"
+          autoComplete="name"
           defaultValue={updateProduct ? data_value.name : ""}
           required
         />
@@ -52,6 +53,7 @@ const ProductsForm = ({
           className={`form-control ${updateProduct ? "" : "border-0"}`}
           placeholder="Price"
           name="price"
+          autoComplete="price"
           min={0}
           defaultValue={updateProduct ? data_value.price : ""}
           required
@@ -61,6 +63,7 @@ const ProductsForm = ({
           className={`form-control ${updateProduct ? "" : "border-0"}`}
           placeholder="Stock"
           name="qty"
+          autoComplete="qty"
           min={0}
           defaultValue={updateProduct ? data_value.qty : ""}
           required
@@ -69,6 +72,7 @@ const ProductsForm = ({
           type="file"
           className={`form-control ${updateProduct ? "" : "border-0"}`}
           name="img"
+          autoComplete="img"
           accept="image/*"
           required={!updateProduct}
         />

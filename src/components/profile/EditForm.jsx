@@ -16,6 +16,7 @@ const EditForm = () => {
             id="fullname"
             className="form-control"
             name="fullname"
+            autoComplete="fullname"
             defaultValue={getUser.fullname}
           />
         </div>
@@ -31,6 +32,7 @@ const EditForm = () => {
             id="username"
             className="form-control"
             name="username"
+            autoComplete="username"
             defaultValue={getUser.username}
           />
         </div>
@@ -43,6 +45,7 @@ const EditForm = () => {
             id="whatsapp"
             className="form-control"
             name="whatsapp"
+            autoComplete="whatsapp"
             defaultValue={getUser.whatsapp}
           />
         </div>
@@ -58,6 +61,7 @@ const EditForm = () => {
             id="email"
             className="form-control"
             name="email"
+            autoComplete="email"
             defaultValue={getUser.email}
           />
         </div>
@@ -74,6 +78,7 @@ const EditForm = () => {
             id="password"
             className="form-control"
             name="password"
+            autoComplete="password"
           />
         </div>
       </div>
