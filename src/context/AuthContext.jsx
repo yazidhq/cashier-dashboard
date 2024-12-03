@@ -6,6 +6,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
+  FacebookAuthProvider,
 } from "firebase/auth";
 import { setDoc, doc, getDoc } from "firebase/firestore";
 import { auth, db } from "../firebase-config";
@@ -107,6 +108,31 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const handleFacebookLogin = async () => {
+    const provider = new FacebookAuthProvider();
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      const userRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(userRef);
+
+      if (!docSnap.exists()) {
+        await setDoc(userRef, {
+          fullname: user.displayName,
+          email: user.email,
+          photoURL: user.photoURL,
+        });
+      }
+
+      setIsLoggedIn(true);
+    } catch (error) {
+      setIsLoggedIn(false);
+      setIsInvalid(true);
+      console.error("Facebook login error:", error);
+    }
+  };
+
   const handleInvalid = () => {
     setIsInvalid(false);
   };
@@ -116,7 +142,9 @@ export const AuthProvider = ({ children }) => {
       await signOut(auth);
       setIsLoggedIn(false);
       setCurrentUser(null);
-    } catch (error) {}
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
   };
 
   if (loading) {
@@ -133,6 +161,7 @@ export const AuthProvider = ({ children }) => {
         currentUser,
         handleLogin,
         handleGoogleLogin,
+        handleFacebookLogin,
         isLoggedIn,
         handleRegister,
         isRegistered,

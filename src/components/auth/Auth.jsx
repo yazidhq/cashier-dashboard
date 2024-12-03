@@ -7,7 +7,8 @@ import { useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
 
 const Auth = ({ handleLogin, handleRegister }) => {
-  const { isInvalid, handleInvalid, handleGoogleLogin } = useAuth();
+  const { isInvalid, handleInvalid, handleGoogleLogin, handleFacebookLogin } =
+    useAuth();
 
   useEffect(() => {
     if (isInvalid) {
@@ -187,7 +188,7 @@ const Auth = ({ handleLogin, handleRegister }) => {
               ></Button>
               <Button
                 text={<FaFacebook className="border rounded-circle fs-1 p-2" />}
-                handleClick={handleGoogleLogin}
+                handleClick={handleFacebookLogin}
               ></Button>
             </div>
           </form>
