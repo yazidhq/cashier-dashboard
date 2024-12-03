@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { useProducts } from "./ProductsContext";
 import useSuccessPayment from "../hooks/useSuccessPayment";
 import useLoading from "../hooks/useLoading";
+import { useAuth } from "./AuthContext";
 
 const OrderContext = createContext();
 
@@ -15,12 +16,17 @@ export const OrderProvider = ({ children }) => {
   const [orderMenu, setOrderMenu] = useState(order);
   const [orderButton, setOrderButton] = useState(false);
   const [changeOrder, setChangeOrder] = useState();
+  const { logout } = useAuth();
+
+  useEffect(() => {
+    setOrderMenu([]);
+  }, [logout]);
 
   useEffect(() => {
     if (products.length < 0) {
       setOrderMenu([]);
     }
-  }, []);
+  }, [localStorage.getItem("order")]);
 
   useEffect(() => {
     localStorage.setItem("order", JSON.stringify(orderMenu));
@@ -98,6 +104,7 @@ export const OrderProvider = ({ children }) => {
   return (
     <OrderContext.Provider
       value={{
+        setOrderMenu,
         addOrder,
         orderMenu,
         totalPrice,
