@@ -32,17 +32,25 @@ export const ProductsProvider = ({ children }) => {
     const shapShot = onSnapshot(
       q,
       (querySnapshot) => {
+        setIsLoading(true);
         const fetchedProducts = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
         setProducts(fetchedProducts);
+        setIsLoading(false);
       },
       () => {
         console.log("Youre not logged in yet");
+        setIsLoading(false);
       }
     );
-    return () => shapShot();
+
+    setIsLoading(true);
+    return () => {
+      shapShot();
+      setIsLoading(false);
+    };
   }, [userId]);
 
   const addProduct = async (e) => {

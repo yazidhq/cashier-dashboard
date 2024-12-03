@@ -6,9 +6,10 @@ import { useProducts } from "../../context/ProductsContext";
 import useCategory from "../../hooks/useCategory";
 import { useOrder } from "../../context/OrderContext";
 import { Link } from "react-router-dom";
+import LoadingSpinner from "../LoadingSpinner";
 
 const Products = ({}) => {
-  const { filteredData } = useProducts();
+  const { isLoading, filteredData } = useProducts();
   const [showCategory, handleCategory] = useCategory();
   const { addOrder } = useOrder();
 
@@ -43,24 +44,28 @@ const Products = ({}) => {
             </div>
           </div>
 
-          {renderProducts.length != 0 ? (
-            <div className="row row-cols-1 row-cols-md-3 g-4">
-              {renderProducts.length != 0 ? (
-                renderProducts
-              ) : (
-                <p>No products yet, create product now</p>
-              )}
+          {isLoading ? (
+            <div className="text-center mt-3">
+              <LoadingSpinner />
             </div>
           ) : (
-            <div className="text-center mt-5">
-              <p className="fs-4">Looks like your inventory is empty.</p>
-              <p className="text-muted">
-                Start adding awesome products
-                <Link to={"/products"} className="text-decoration-none">
-                  <span className="fw-bold  text-danger"> now!</span>
-                </Link>
-              </p>
-            </div>
+            <>
+              {renderProducts.length > 0 ? (
+                <div className="row row-cols-1 row-cols-md-3 g-4">
+                  {renderProducts}
+                </div>
+              ) : (
+                <div className="text-center mt-5">
+                  <p className="fs-4">Looks like your inventory is empty.</p>
+                  <p className="text-muted">
+                    Start adding awesome products
+                    <Link to={"/products"} className="text-decoration-none">
+                      <span className="fw-bold text-danger"> now!</span>
+                    </Link>
+                  </p>
+                </div>
+              )}
+            </>
           )}
         </div>
       </div>
