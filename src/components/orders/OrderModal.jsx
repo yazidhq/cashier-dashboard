@@ -121,10 +121,10 @@ const OrderModal = ({
   );
 
   return (
-    <div className="modal" style={{ display: "block" }}>
+    <div className="modal modal-transition" style={{ display: "block" }}>
       <div className="modal-dialog">
         <div className="border-top border-3 border-danger">
-          <div className="modal-content shadow-sm rounded-0 border-0">
+          <div className="shadow modal-content rounded-0 border-0">
             <div className="modal-header">
               <h5 className="modal-title px-2">Payment</h5>
               {!successPayment && (

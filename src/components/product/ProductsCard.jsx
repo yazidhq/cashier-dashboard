@@ -45,7 +45,7 @@ const Products = ({}) => {
         className="flex-grow-1 px-5 pt-4 bg-light pb-1"
         style={{ minHeight: "calc(100vh)" }}
       >
-        <Category handleCategory={handleCategory} />
+        <Category handleCategory={handleCategory} showCategory={showCategory} />
         <div className="mb-5">
           <div className="d-flex justify-content-between">
             <TitleMenu firstWord={"Choose"} lastWord={"Order"} />

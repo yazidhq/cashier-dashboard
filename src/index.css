@@ -38,9 +38,30 @@
   background-color: #ebebeb !important;
 }
 
+.card-v2 {
+  cursor: pointer;
+}
+
 .card-v2:hover {
   transform: scale(1.05);
   transition: transform 0.3s ease;
+}
+
+.card-h {
+  transform: scale(1.05);
+}
+
+.modal-transition {
+  animation: scaling 0.5s forwards;
+}
+
+@keyframes scaling {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
 .icon-xlarge {
