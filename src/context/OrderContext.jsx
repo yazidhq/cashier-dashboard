@@ -9,7 +9,6 @@ const OrderContext = createContext();
 export const useOrder = () => useContext(OrderContext);
 
 export const OrderProvider = ({ children }) => {
-  const { products } = useProducts();
   const [successPayment, setSuccessPayment] = useSuccessPayment();
   const [isLoading, setIsLoading] = useLoading();
   const order = JSON.parse(localStorage.getItem("order")) || [];
@@ -21,12 +20,6 @@ export const OrderProvider = ({ children }) => {
   useEffect(() => {
     setOrderMenu([]);
   }, [logout]);
-
-  useEffect(() => {
-    if (products.length <= 0) {
-      setOrderMenu([]);
-    }
-  }, [localStorage.getItem("order")]);
 
   useEffect(() => {
     localStorage.setItem("order", JSON.stringify(orderMenu));
