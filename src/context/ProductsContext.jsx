@@ -12,6 +12,7 @@ import {
   onSnapshot,
   query,
   updateDoc,
+  where,
 } from "firebase/firestore";
 import useUserId from "../hooks/useUserId";
 import useSearch from "../hooks/useSearch";
@@ -27,7 +28,7 @@ export const ProductsProvider = ({ children }) => {
   const [userId] = useUserId();
 
   useEffect(() => {
-    const q = query(collection(db, "products"));
+    const q = query(collection(db, "products"), where("userId", "==", userId));
     const shapShot = onSnapshot(
       q,
       (querySnapshot) => {
@@ -42,7 +43,7 @@ export const ProductsProvider = ({ children }) => {
       }
     );
     return () => shapShot();
-  }, []);
+  }, [userId]);
 
   const addProduct = async (e) => {
     e.preventDefault();

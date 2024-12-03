@@ -5,13 +5,10 @@ import { IoFilterOutline } from "react-icons/io5";
 import { useProducts } from "../../context/ProductsContext";
 import useCategory from "../../hooks/useCategory";
 import { useOrder } from "../../context/OrderContext";
-import { collection, onSnapshot, query } from "firebase/firestore";
-import { useEffect } from "react";
-import { db } from "../../firebase-config";
-import LoadingSpinner from "../LoadingSpinner";
+import { Link } from "react-router-dom";
 
 const Products = ({}) => {
-  const { setProducts, filteredData } = useProducts();
+  const { filteredData } = useProducts();
   const [showCategory, handleCategory] = useCategory();
   const { addOrder } = useOrder();
 
@@ -20,24 +17,6 @@ const Products = ({}) => {
       <ProductCard key={item.img} item={item} handleAddOrder={addOrder} />
     ) : null;
   });
-
-  useEffect(() => {
-    const q = query(collection(db, "products"));
-    const shapShot = onSnapshot(
-      q,
-      (querySnapshot) => {
-        const fetchedProducts = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setProducts(fetchedProducts);
-      },
-      () => {
-        console.log("Youre not logged in yet");
-      }
-    );
-    return () => shapShot();
-  }, []);
 
   return (
     <div style={{ paddingLeft: "2.5rem" }}>
@@ -66,11 +45,21 @@ const Products = ({}) => {
 
           {renderProducts.length != 0 ? (
             <div className="row row-cols-1 row-cols-md-3 g-4">
-              {renderProducts}
+              {renderProducts.length != 0 ? (
+                renderProducts
+              ) : (
+                <p>No products yet, create product now</p>
+              )}
             </div>
           ) : (
             <div className="text-center mt-5">
-              <LoadingSpinner />
+              <p className="fs-4">Looks like your inventory is empty.</p>
+              <p className="text-muted">
+                Start adding awesome products
+                <Link to={"/products"} className="text-decoration-none">
+                  <span className="fw-bold  text-danger"> now!</span>
+                </Link>
+              </p>
             </div>
           )}
         </div>
