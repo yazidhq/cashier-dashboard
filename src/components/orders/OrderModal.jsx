@@ -5,6 +5,7 @@ import LoadingSpinner from "../LoadingSpinner";
 import OrderInputNominal from "./OrderInputNominal";
 import OrderTotal from "./OrderTotal";
 import { FaCheckCircle } from "react-icons/fa";
+import React, { useState, useEffect } from "react";
 
 const OrderModal = ({
   changeOrder,
@@ -13,7 +14,6 @@ const OrderModal = ({
   orderItemsQty,
 }) => {
   const { handleSaveReport, successPayment, isLoading } = useReports();
-
   const {
     totalPrice,
     taxPrice,
@@ -116,22 +116,35 @@ const OrderModal = ({
           <div className="px-4 pb-4">{payNow}</div>
         </div>
       )}
-      ;
     </>
   );
 
+  const [isVisible, setIsVisible] = useState(true);
+  const [isClosing, setIsClosing] = useState(false);
+
+  const handleClose = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setIsVisible(false);
+      handleOrderButton();
+    }, 500);
+  };
+
   return (
-    <div className="modal modal-transition" style={{ display: "block" }}>
+    <div
+      className={`modal fade-in bg-soft-dark  ${isClosing ? "fade-out" : ""}`}
+      style={{ display: isVisible ? "block" : "none" }}
+    >
       <div className="modal-dialog">
         <div className="border-top border-3 border-danger">
-          <div className="shadow modal-content rounded-0 border-0">
+          <div className="modal-content rounded-0 border-0">
             <div className="modal-header">
               <h5 className="modal-title px-2">Payment</h5>
               {!successPayment && (
                 <button
                   type="button"
                   className="btn-close px-2"
-                  onClick={handleOrderButton}
+                  onClick={handleClose}
                   aria-label="Close"
                 ></button>
               )}
