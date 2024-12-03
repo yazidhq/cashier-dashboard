@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
 
 const Auth = ({ handleLogin, handleRegister }) => {
-  const { isInvalid, handleInvalid } = useAuth();
+  const { isInvalid, handleInvalid, handleGoogleLogin } = useAuth();
 
   useEffect(() => {
     if (isInvalid) {
@@ -155,9 +155,14 @@ const Auth = ({ handleLogin, handleRegister }) => {
               </span>
             </div>
             <div className="d-flex justify-content-center gap-3">
-              <FaGithub className="border rounded-circle fs-1 p-2" />
-              <FcGoogle className="border rounded-circle fs-1 p-2" />
-              <FaFacebook className="border rounded-circle fs-1 p-2" />
+              <Button
+                text={<FcGoogle className="border rounded-circle fs-1 p-2" />}
+                handleClick={handleGoogleLogin}
+              ></Button>
+              <Button
+                text={<FaFacebook className="border rounded-circle fs-1 p-2" />}
+                handleClick={handleGoogleLogin}
+              ></Button>
             </div>
           </form>
         </div>

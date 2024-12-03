@@ -4,8 +4,10 @@ import {
   signOut,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
 } from "firebase/auth";
-import { setDoc, doc } from "firebase/firestore";
+import { setDoc, doc, getDoc } from "firebase/firestore";
 import { auth, db } from "../firebase-config";
 import Swal from "sweetalert2";
 import LoadingSpinner from "../components/LoadingSpinner";
@@ -75,17 +77,33 @@ export const AuthProvider = ({ children }) => {
     };
     try {
       await signInWithEmailAndPassword(auth, data.email, data.password);
-      await Swal.fire(
-        "Success!",
-        "You have logged in successfully.",
-        "success"
-      ).then(async (result) => {
-        if (result.isConfirmed || result.isDismissed) {
-          setIsLoggedIn(true);
-        }
-      });
+      setIsLoggedIn(true);
     } catch (error) {
+      setIsLoggedIn(false);
       setIsInvalid(true);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      const userRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(userRef);
+
+      if (!docSnap.exists()) {
+        await setDoc(userRef, {
+          fullname: user.displayName,
+          email: user.email,
+          photoURL: user.photoURL,
+        });
+      }
+
+      setIsLoggedIn(true);
+    } catch (error) {
+      setIsLoggedIn(false);
     }
   };
 
@@ -96,10 +114,9 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       await signOut(auth);
+      setIsLoggedIn(false);
       setCurrentUser(null);
-    } catch (error) {
-      console.error("Error logging out:", error);
-    }
+    } catch (error) {}
   };
 
   if (loading) {
@@ -115,6 +132,7 @@ export const AuthProvider = ({ children }) => {
       value={{
         currentUser,
         handleLogin,
+        handleGoogleLogin,
         isLoggedIn,
         handleRegister,
         isRegistered,
