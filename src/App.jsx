@@ -26,13 +26,13 @@ const ProtectedRoute = ({ children }) => {
 
 function App() {
   return (
-    <AuthProvider>
-      <GetUserProvider>
-        <ProfileProvider>
-          <ProductsProvider>
-            <OrderProvider>
-              <ReportsProvider>
-                <Router>
+    <Router>
+      <AuthProvider>
+        <GetUserProvider>
+          <ProfileProvider>
+            <ProductsProvider>
+              <OrderProvider>
+                <ReportsProvider>
                   <Routes>
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
@@ -69,13 +69,13 @@ function App() {
                       }
                     />
                   </Routes>
-                </Router>
-              </ReportsProvider>
-            </OrderProvider>
-          </ProductsProvider>
-        </ProfileProvider>
-      </GetUserProvider>
-    </AuthProvider>
+                </ReportsProvider>
+              </OrderProvider>
+            </ProductsProvider>
+          </ProfileProvider>
+        </GetUserProvider>
+      </AuthProvider>
+    </Router>
   );
 }
 
