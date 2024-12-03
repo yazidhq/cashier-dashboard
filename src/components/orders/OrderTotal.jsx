@@ -1,4 +1,5 @@
 import { useOrder } from "../../context/OrderContext";
+import useRupiah from "../../hooks/useRupiah";
 
 const OrderTotal = ({}) => {
   const { totalPrice, taxPrice, changeOrder } = useOrder();
@@ -14,20 +15,11 @@ const OrderTotal = ({}) => {
           <span className="fw-bold">Total</span>
         </div>
         <div className="ms-auto">
-          <span>
-            Rp. {totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-          </span>
+          <span>{useRupiah(totalPrice)}</span>
           <br />
-          <span>
-            Rp. {taxPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-          </span>
+          <span>{useRupiah(taxPrice)}</span>
           <br />
-          <span className="fw-bold">
-            Rp.{" "}
-            {(totalPrice + taxPrice)
-              .toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-          </span>
+          <span className="fw-bold">{useRupiah(totalPrice + taxPrice)}</span>
         </div>
       </div>
       <hr />
@@ -39,15 +31,10 @@ const OrderTotal = ({}) => {
             <span className="fw-bold">Change</span>
           </div>
           <div className="ms-auto">
-            <span>
-              Rp. {changeOrder.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-            </span>
+            <span>{useRupiah(changeOrder)}</span>
             <br />
             <span className="fw-bold">
-              Rp.{" "}
-              {(changeOrder - (totalPrice + taxPrice))
-                .toString()
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+              {useRupiah(changeOrder - (totalPrice + taxPrice))}
             </span>
           </div>
         </div>

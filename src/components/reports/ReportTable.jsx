@@ -5,6 +5,7 @@ import LoadingSpinner from "../LoadingSpinner";
 import { usePaginated } from "../../hooks/usePaginated";
 import Pagination from "../Pagination";
 import { Link } from "react-router-dom";
+import useRupiah from "../../hooks/useRupiah";
 
 const ReportTable = ({}) => {
   const { filteredData, handleDetails, details, removeReport, isLoading } =
@@ -45,7 +46,7 @@ const ReportTable = ({}) => {
   };
 
   const renderCurrency = (amount) => {
-    return "Rp. " + amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    return useRupiah(amount);
   };
 
   const dataReports = paginatedItems.map((item, index) => (

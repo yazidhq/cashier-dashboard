@@ -1,5 +1,6 @@
 import useSkeleton from "../../hooks/useSkeleton";
 import useUserId from "../../hooks/useUserId";
+import useRupiah from "../../hooks/useRupiah";
 
 const ProductCard = ({ item, handleAddOrder }) => {
   const [isSkeleton, handleImageLoaded] = useSkeleton();
@@ -27,10 +28,7 @@ const ProductCard = ({ item, handleAddOrder }) => {
               </div>
               <div className="mt-auto">
                 <div className="fs-6 fw-bold py-2">{item.name}</div>
-                <span className="text-muted">
-                  Rp.{" "}
-                  {item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-                </span>
+                <span className="text-muted">{useRupiah(item.price)}</span>
               </div>
             </div>
           </div>

@@ -7,6 +7,7 @@ import useSkeleton from "../../hooks/useSkeleton";
 import useUserId from "../../hooks/useUserId";
 import Pagination from "../Pagination";
 import { usePaginated } from "../../hooks/usePaginated";
+import useRupiah from "../../hooks/useRupiah";
 
 const ProductTable = ({}) => {
   const { filteredData, removeProduct, updateProduct } = useProducts();
@@ -34,10 +35,7 @@ const ProductTable = ({}) => {
               />
             </div>
             <div className="col-md-4 mt-2">{item.name}</div>
-            <div className="col-md-2 mt-2">
-              Rp.
-              {item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-            </div>
+            <div className="col-md-2 mt-2">{useRupiah(item.price)}</div>
             <div className="col-md-2 mt-2">{item.qty}</div>
             <div className="col-md-2 mt-2">
               <div className="d-flex gap-3 mt-1">
