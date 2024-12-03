@@ -164,6 +164,7 @@ export const ProductsProvider = ({ children }) => {
   return (
     <ProductsContext.Provider
       value={{
+        setProducts,
         products,
         isLoading,
         addProduct,

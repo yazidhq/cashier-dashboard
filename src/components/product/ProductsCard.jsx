@@ -5,9 +5,12 @@ import { IoFilterOutline } from "react-icons/io5";
 import { useProducts } from "../../context/ProductsContext";
 import useCategory from "../../hooks/useCategory";
 import { useOrder } from "../../context/OrderContext";
+import { collection, onSnapshot, query } from "firebase/firestore";
+import { useEffect } from "react";
+import { db } from "../../firebase-config";
 
 const Products = ({}) => {
-  const { filteredData } = useProducts();
+  const { setProducts, filteredData } = useProducts();
   const [showCategory, handleCategory] = useCategory();
   const { addOrder } = useOrder();
 
@@ -16,6 +19,24 @@ const Products = ({}) => {
       <ProductCard key={item.img} item={item} handleAddOrder={addOrder} />
     ) : null;
   });
+
+  useEffect(() => {
+    const q = query(collection(db, "products"));
+    const shapShot = onSnapshot(
+      q,
+      (querySnapshot) => {
+        const fetchedProducts = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setProducts(fetchedProducts);
+      },
+      () => {
+        console.log("Youre not logged in yet");
+      }
+    );
+    return () => shapShot();
+  }, []);
 
   return (
     <div style={{ paddingLeft: "2.5rem" }}>
