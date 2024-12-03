@@ -52,7 +52,7 @@
 }
 
 .fade-in {
-  animation: scaling 0.5s forwards;
+  animation: scaling 0.3s forwards;
 }
 
 @keyframes scaling {
@@ -65,7 +65,7 @@
 }
 
 .fade-out {
-  animation: fadeOut 0.5s forwards;
+  animation: fadeOut 0.3s forwards;
 }
 
 @keyframes fadeOut {
