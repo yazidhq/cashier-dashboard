@@ -5,7 +5,7 @@ import LoadingSpinner from "../LoadingSpinner";
 import OrderInputNominal from "./OrderInputNominal";
 import OrderTotal from "./OrderTotal";
 import { FaCheckCircle } from "react-icons/fa";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const OrderModal = ({
   changeOrder,
@@ -62,18 +62,6 @@ const OrderModal = ({
               style={{ fontSize: "150px" }}
             />
             <p className="text-success fs-3">Payment Successful!</p>
-            <div className="input-group px-4 mb-3">
-              <input
-                type="text"
-                className="form-control border-success rounded-0"
-                placeholder="send receipt to email"
-              />
-              <Button
-                text={"send"}
-                color={"outline-success"}
-                rounded={"rounded-0"}
-              />
-            </div>
             <Button
               text={"Print Receipt"}
               color={"outline-success"}

@@ -23,7 +23,7 @@ export const OrderProvider = ({ children }) => {
   }, [logout]);
 
   useEffect(() => {
-    if (products.length < 0) {
+    if (products.length <= 0) {
       setOrderMenu([]);
     }
   }, [localStorage.getItem("order")]);
