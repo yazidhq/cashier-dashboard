@@ -17,6 +17,7 @@ Website Cashier is a simple web application that allows you to efficiently manag
 - **Vite**
 - **Bootstrap**
 - **SweetAlert**
+- **Firebase**
 
 ## Installation
 
